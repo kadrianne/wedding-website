@@ -5,13 +5,13 @@ const menu = document.createElement('nav')
 const menuLinks = [
     {
         title: "save the date",
-        url: "/save-the-date.html"
+        url: "/index.html"
     },{
         title: "club paradise",
-        url:""
+        url:"club-paradise.html"
     },{
         title: "contact",
-        url:""
+        url:"contact.html"
     }
 ]
 
