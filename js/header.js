@@ -1,0 +1,34 @@
+const header = document.querySelector('header')
+const heading = document.createElement('p')
+const tagline = document.createElement('p')
+const menu = document.createElement('nav')
+const menuLinks = [
+    {
+        title: "save the date",
+        url: "/save-the-date.html"
+    },{
+        title: "club paradise",
+        url:""
+    },{
+        title: "contact",
+        url:""
+    }
+]
+
+heading.className = "heading"
+heading.innerText = "Kristine & Samuel"
+
+tagline.className = "tagline"
+tagline.innerText = "are getting married!"
+
+menu.className = "menu"
+
+menuLinks.forEach(link =>{
+    const menuItem = document.createElement('li')
+    menuItem.innerHTML = `<a href="${link.url}">${link.title}</a>`
+    menu.append(menuItem)
+})
+
+header.append(heading)
+header.append(tagline)
+header.append(menu)
