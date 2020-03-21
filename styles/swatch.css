@@ -1,0 +1,36 @@
+div {
+  width: 25px;
+  height: 25px;
+  margin: 5px 5px 5px 5px; }
+
+.primary-colors .swatch1 {
+  background-color: #003366; }
+.primary-colors .swatch2 {
+  background-color: #084d91; }
+.primary-colors .swatch3 {
+  background-color: #0f66bd; }
+.primary-colors .swatch4 {
+  background-color: #2873bd; }
+.primary-colors .swatch5 {
+  background-color: #4080bf; }
+.primary-colors .swatch6 {
+  background-color: #5e8cba; }
+.primary-colors .swatch7 {
+  background-color: #7a99b8; }
+.primary-colors .swatch8 {
+  background-color: #9fb3c6; }
+.primary-colors .swatch9 {
+  background-color: #c2ccd6; }
+
+.secondary-colors .swatch1 {
+  background-color: #d28579; }
+.secondary-colors .swatch2 {
+  background-color: #ec9f93; }
+.secondary-colors .swatch3 {
+  background-color: #f2b0a6; }
+.secondary-colors .swatch4 {
+  background-color: #ffd3cc; }
+.secondary-colors .swatch5 {
+  background-color: #ffe0db; }
+
+/*# sourceMappingURL=swatch.css.map */

@@ -5,14 +5,14 @@ body {
   min-height: 100vh;
   min-height: 100vw;
   font-family: 'Roboto', sans-serif;
-  background-color: #668cb2;
+  background-color: #5e8cba;
   color: white;
   display: flex;
   flex-direction: column; }
 
 header {
   padding-top: 25px;
-  color: #004a94;
+  color: #084d91;
   /* box-shadow: 5px 5px 5px lightgrey; */
   text-align: center; }
   header .heading {
@@ -43,29 +43,19 @@ a:hover {
   font-weight: 400;
   border-bottom: 5px;
   border-bottom-style: solid;
-  color: #ffd4c2; }
+  color: #ffd3cc; }
 
 a:active {
   font-weight: 400;
   border-bottom: 5px;
   border-style: solid;
-  color: #ffd4c2; }
+  color: #ffd3cc; }
 
 main {
   background-color: black; }
 
-.main-container {
-  margin-left: 100px;
-  margin-right: 100px;
-  padding-top: 25px;
-  padding-bottom: 25px;
-  display: grid;
-  grid-template-columns: 300px auto 630px; }
-
 footer {
   text-align: center;
-  margin-left: 100px;
-  margin-right: 100px;
   padding-top: 25px;
   padding-bottom: 25px;
   font-size: 14px; }
