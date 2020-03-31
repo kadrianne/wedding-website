@@ -2,78 +2,102 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,700&display=swap');
 @import 'reset.css';
 @import 'colors';
+@import 'typography';
 
 body {
-    min-height: 100vh;
-    min-height: 100vw;
     font-family: 'Roboto', sans-serif;
-    background-color: $primary-color-6;
-    color: white;
+    color: $grey-9;
     display: flex;
     flex-direction: column;
 }
 
 header {
-    padding-top: 25px;
-    color: $primary-color-2;
-    /* box-shadow: 5px 5px 5px lightgrey; */
+    background-color: $primary-color-6;
+    padding-top: 20px;
     text-align: center;
-
+    
     .heading {
-        font-size: 40px;
+        color: $primary-color-2;
+        font-size: $font-xxl;
+        letter-spacing: 2px;
         font-family: 'Playfair Display', serif;
         font-weight: 500;
         margin: auto;
     }
-
+    
     .tagline {
-        font-size: 18px;
+        color: $primary-color-2;
+        font-size: $font-baseline;
         font-weight: 300;
     }
-
+    
     nav {
         display: flex;
         justify-content: center;
     }
-
-        .menu {
-            font-size: 16px;
-            font-weight: 400;
-            padding: 25px 25px 15px 25px;
-        }
-
-            .menu > li {
-                list-style-type: none;
-                padding: 10px 20px 10px 20px;
-            }
+    
+    .menu {
+        font-size: $font-small;
+        font-weight: 400;
+        padding: 20px 25px 10px 25px;
+    }
+    
+    .menu > li {
+        list-style-type: none;
+        padding: 10px 20px 10px 20px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: $grey-9;
+        font-weight: 300;
+    }
+    
+    a:hover {
+        font-weight:400;
+        border-bottom: 5px;
+        border-bottom-style: solid;
+        color: $secondary-color-4;
+    }
+    
+    a:active {
+        font-weight:400;
+        border-bottom: 5px;
+        border-style: solid;
+        color: $secondary-color-4;
+    }
 }
 
-a {
-    text-decoration: none;
-    color: white;
-    font-weight: 300;
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%
 }
 
-a:hover {
-    font-weight:400;
-    border-bottom: 5px;
-    border-bottom-style: solid;
-    color: $secondary-color-4;
-}
-
-a:active {
-    font-weight:400;
-    border-bottom: 5px;
-    border-style: solid;
-    color: $secondary-color-4;
+.sticky + main {
+    padding-top: 162px;
 }
 
 main {
-    background-color: black;
+    min-height: 100vh;
+    background-color: $grey-9;
+    color: $primary-color-5;
+    text-align: center;
+    
+    h1 {
+        font-family: 'Playfair Display', serif;
+        letter-spacing: 1px;
+        padding-top: 25px;
+        padding-bottom: 25px;
+        color: $primary-color-3;
+        font-weight: 500;
+        font-size: $font-xl;
+    }
 }
 
 footer {
     text-align: center;
+    background-color: $primary-color-6;
     padding-top: 25px;
     padding-bottom: 25px;
     font-size: 14px;

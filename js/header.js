@@ -32,3 +32,14 @@ menuLinks.forEach(link =>{
 header.append(heading)
 header.append(tagline)
 header.append(menu)
+
+document.addEventListener('scroll', () => {
+    const header = document.querySelector('header');
+    const sticky = header.offsetTop;
+
+    if (window.pageYOffset > sticky) {
+        header.classList.add("sticky");
+    } else {
+        header.classList.remove("sticky");
+    }
+})

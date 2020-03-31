@@ -20,7 +20,7 @@ div {
 .primary-colors .swatch8 {
   background-color: #9fb3c6; }
 .primary-colors .swatch9 {
-  background-color: #c2ccd6; }
+  background-color: #bfccd9; }
 
 .secondary-colors .swatch1 {
   background-color: #d28579; }
@@ -32,5 +32,24 @@ div {
   background-color: #ffd3cc; }
 .secondary-colors .swatch5 {
   background-color: #ffe0db; }
+
+.grey .swatch1 {
+  background-color: #364049; }
+.grey .swatch2 {
+  background-color: #4c5967; }
+.grey .swatch3 {
+  background-color: #627384; }
+.grey .swatch4 {
+  background-color: #7b8c9d; }
+.grey .swatch5 {
+  background-color: #98a6b3; }
+.grey .swatch6 {
+  background-color: #b6bfc9; }
+.grey .swatch7 {
+  background-color: #d3d9de; }
+.grey .swatch8 {
+  background-color: #e2e6e9; }
+.grey .swatch9 {
+  background-color: #f0f2f4; }
 
 /*# sourceMappingURL=swatch.css.map */
