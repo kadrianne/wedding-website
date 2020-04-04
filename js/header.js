@@ -4,10 +4,10 @@ const menuLinks = [
         url: "/"
     },{
         title: "club paradise",
-        url:"club-paradise"
+        url:"/club-paradise"
     },{
         title: "contact",
-        url:"contact"
+        url:"/contact"
     }
 ]
 
