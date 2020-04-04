@@ -1,39 +1,68 @@
-const header = document.querySelector('header')
-const heading = document.createElement('p')
-const tagline = document.createElement('p')
-const menu = document.createElement('nav')
 const menuLinks = [
     {
         title: "save the date",
-        url: "/index.html"
+        url: "/"
     },{
         title: "club paradise",
-        url:"club-paradise.html"
+        url:"club-paradise"
     },{
         title: "contact",
-        url:"contact.html"
+        url:"contact"
     }
 ]
 
-heading.className = "heading"
-heading.innerText = "Kristine & Samuel"
+buildHeader()
 
-tagline.className = "tagline"
-tagline.innerText = "are getting married!"
+function buildHeader() {
+    const header = document.querySelector('header')
+    addHeading(header)
+    addTagline(header)
+    createMenu(header)
+    document.addEventListener('scroll', makeHeaderSticky)
+}
 
-menu.className = "menu"
+function addHeading(header){
+    const heading = document.createElement('p')
+    heading.className = "heading"
+    heading.innerText = "Kristine & Samuel"
+    header.append(heading)
+}
 
-menuLinks.forEach(link =>{
-    const menuItem = document.createElement('li')
-    menuItem.innerHTML = `<a href="${link.url}">${link.title}</a>`
-    menu.append(menuItem)
-})
+function addTagline(header){
+    const tagline = document.createElement('p')
+    tagline.className = "tagline"
+    tagline.innerText = "are getting married!"
+    header.append(tagline)
+}
 
-header.append(heading)
-header.append(tagline)
-header.append(menu)
+function createMenu(header){
+    const menu = document.createElement('nav')
+    const menuContainer = document.createElement('div')
+    const menuList = document.createElement('ul')
 
-document.addEventListener('scroll', () => {
+    menu.className = "menu navbar navbar-expand-lg navbar-collapse justify-content-center navbar-light"
+    menu.innerHTML = `<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#menu-links">
+    <span class="navbar-toggler-icon"></span>
+    </button>`
+
+    menuContainer.className = "collapse navbar-collapse"
+    menuContainer.id = 'menu-links'
+    
+    menuList.className = "navbar-nav mr-auto mt-2 mt-lg-0"
+    
+    menuLinks.forEach(link =>{
+        const menuItem = document.createElement('li')
+        menuItem.className = "nav-link"
+        menuItem.innerHTML = `<a href="${link.url}">${link.title}</a>`
+        menuList.append(menuItem)
+    })
+
+    menuContainer.appendChild(menuList)
+    menu.appendChild(menuContainer)
+    header.append(menu)
+}
+
+function makeHeaderSticky(){
     const header = document.querySelector('header');
     const sticky = header.offsetTop;
 
@@ -42,4 +71,4 @@ document.addEventListener('scroll', () => {
     } else {
         header.classList.remove("sticky");
     }
-})
+}
