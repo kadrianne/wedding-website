@@ -63,21 +63,37 @@ main {
   background-color: #f0f2f4;
   color: #4080bf;
   text-align: center; }
-  main h1 {
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1px;
-    padding-top: 25px;
-    padding-bottom: 25px;
-    color: #0f66bd;
-    font-weight: 500;
-    font-size: 30px; }
 
 footer {
   text-align: center;
   background-color: #5e8cba;
+  color: #f0f2f4;
   padding-top: 25px;
   padding-bottom: 25px;
   font-size: 14px; }
+
+h1 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  color: #0f66bd;
+  font-weight: 500;
+  font-size: 30px; }
+
+h2 {
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 1px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  color: #0f66bd;
+  font-weight: 500;
+  font-size: 24px; }
+
+form p {
+  padding-bottom: 15px;
+  color: #98a6b3;
+  line-height: 120%; }
 
 .login {
   background-color: white;

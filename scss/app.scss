@@ -88,55 +88,73 @@ main {
     background-color: $grey-9;
     color: $primary-color-5;
     text-align: center;
-    
-    h1 {
-        font-family: 'Playfair Display', serif;
-        letter-spacing: 1px;
-        padding-top: 25px;
-        padding-bottom: 25px;
-        color: $primary-color-3;
-        font-weight: 500;
-        font-size: $font-xl;
-    }
 }
 
 footer {
     text-align: center;
     background-color: $primary-color-6;
+    color: $grey-9;
     padding-top: 25px;
     padding-bottom: 25px;
     font-size: 14px;
 }
 
+h1 {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: $primary-color-3;
+    font-weight: 500;
+    font-size: $font-xl;
+}
+h2 {
+    font-family: 'Playfair Display', serif;
+    letter-spacing: 1px;
+    padding-top: 25px;
+    padding-bottom: 25px;
+    color: $primary-color-3;
+    font-weight: 500;
+    font-size: $font-large;
+}
+
+form {
+    p {
+        padding-bottom: 15px;
+        color: $grey-5;
+        line-height: 120%;
+    }
+}
+    
 .login {
     background-color: white;
     padding: 30px 30px 30px 30px;
     display: inline-block;
     width: 400px;
-
+    
     .btn {
         background-color: $secondary-color-2 !important;
         border-color: $secondary-color-4 !important;
     }
-
+    
     .btn:hover {
         background-color: white !important;
         color: $secondary-color-2;
     }
-
+    
     div {
         text-align: left;
         
         label {
             padding-bottom: 3px;
         }
-
+        
         
         ::placeholder {
             color: $grey-7;
         }
     }
-
+    
     .error-messages {
         text-align: left;
         color: red !important;
