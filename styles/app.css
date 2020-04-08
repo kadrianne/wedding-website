@@ -79,4 +79,22 @@ footer {
   padding-bottom: 25px;
   font-size: 14px; }
 
+.login {
+  background-color: white;
+  padding: 30px 30px 30px 30px;
+  display: inline-block;
+  width: 400px; }
+  .login .btn {
+    background-color: #ec9f93 !important;
+    border-color: #ffd3cc !important; }
+  .login .btn:hover {
+    background-color: white !important;
+    color: #ec9f93; }
+  .login div {
+    text-align: left; }
+    .login div label {
+      padding-bottom: 3px; }
+    .login div ::placeholder {
+      color: #d3d9de; }
+
 /*# sourceMappingURL=app.css.map */

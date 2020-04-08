@@ -107,3 +107,32 @@ footer {
     padding-bottom: 25px;
     font-size: 14px;
 }
+
+.login {
+    background-color: white;
+    padding: 30px 30px 30px 30px;
+    display: inline-block;
+    width: 400px;
+
+    .btn {
+        background-color: $secondary-color-2 !important;
+        border-color: $secondary-color-4 !important;
+    }
+
+    .btn:hover {
+        background-color: white !important;
+        color: $secondary-color-2;
+    }
+
+    div {
+        text-align: left;
+        
+        label {
+            padding-bottom: 3px;
+        }
+
+        ::placeholder {
+            color: $grey-7;
+        }
+    }
+}
