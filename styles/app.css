@@ -96,5 +96,10 @@ footer {
       padding-bottom: 3px; }
     .login div ::placeholder {
       color: #d3d9de; }
+  .login .error-messages {
+    text-align: left;
+    color: red !important;
+    font-size: 14px;
+    padding-bottom: 10px; }
 
 /*# sourceMappingURL=app.css.map */

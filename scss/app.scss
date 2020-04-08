@@ -131,8 +131,16 @@ footer {
             padding-bottom: 3px;
         }
 
+        
         ::placeholder {
             color: $grey-7;
         }
+    }
+
+    .error-messages {
+        text-align: left;
+        color: red !important;
+        font-size: $font-xs;
+        padding-bottom: 10px;
     }
 }
