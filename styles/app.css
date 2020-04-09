@@ -8,18 +8,18 @@ body {
   flex-direction: column; }
 
 header {
-  background-color: #5e8cba;
+  background-color: #6699cc;
   padding-top: 20px;
   text-align: center; }
   header .heading {
-    color: #084d91;
+    color: #174d82;
     font-size: 40px;
     letter-spacing: 1px;
     font-family: 'Playfair Display', serif;
     font-weight: 500;
     margin: auto; }
   header .tagline {
-    color: #084d91;
+    color: #174d82;
     font-size: 20px;
     font-weight: 300; }
   header .menu {
@@ -61,12 +61,30 @@ header {
 main {
   min-height: 100vh;
   background-color: #f0f2f4;
-  color: #4080bf;
-  text-align: center; }
+  color: #538cc6;
+  text-align: center;
+  padding-left: 100px;
+  padding-right: 100px; }
+  main .guest-container {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 20px;
+    padding-bottom: 10px; }
+    main .guest-container .button-container {
+      display: flex;
+      align-items: flex-end; }
+      main .guest-container .button-container button {
+        background-color: #4080bf !important;
+        color: #f0f2f4;
+        border-color: #538cc6;
+        margin-right: 5px; }
+      main .guest-container .button-container button:hover {
+        background-color: #f0f2f4 !important;
+        color: #4080bf; }
 
 footer {
   text-align: center;
-  background-color: #5e8cba;
+  background-color: #6699cc;
   color: #f0f2f4;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -77,7 +95,7 @@ h1 {
   letter-spacing: 1px;
   padding-top: 25px;
   padding-bottom: 25px;
-  color: #0f66bd;
+  color: #2966a3;
   font-weight: 500;
   font-size: 30px; }
 
@@ -86,9 +104,15 @@ h2 {
   letter-spacing: 1px;
   padding-top: 25px;
   padding-bottom: 25px;
-  color: #0f66bd;
+  color: #2966a3;
   font-weight: 500;
   font-size: 24px; }
+
+h3 {
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: underline;
+  padding-bottom: 5px; }
 
 form p {
   padding-bottom: 15px;
@@ -117,5 +141,21 @@ form p {
     color: red !important;
     font-size: 14px;
     padding-bottom: 10px; }
+
+table thead {
+  background-color: #b3cce6;
+  color: #0f3357; }
+
+.fa-heart {
+  color: #ec9f93; }
+
+.fa-frown {
+  color: #174d82; }
+
+.fa-question {
+  color: #7b8c9d; }
+
+#rsvp-count {
+  text-align: center; }
 
 /*# sourceMappingURL=app.css.map */

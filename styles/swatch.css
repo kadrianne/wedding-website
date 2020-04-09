@@ -4,23 +4,23 @@ div {
   margin: 5px 5px 5px 5px; }
 
 .primary-colors .swatch1 {
-  background-color: #003366; }
+  background-color: #0f3357; }
 .primary-colors .swatch2 {
-  background-color: #084d91; }
+  background-color: #174d82; }
 .primary-colors .swatch3 {
-  background-color: #0f66bd; }
+  background-color: #2966a3; }
 .primary-colors .swatch4 {
-  background-color: #2873bd; }
-.primary-colors .swatch5 {
   background-color: #4080bf; }
+.primary-colors .swatch5 {
+  background-color: #538cc6; }
 .primary-colors .swatch6 {
-  background-color: #5e8cba; }
+  background-color: #6699cc; }
 .primary-colors .swatch7 {
-  background-color: #7a99b8; }
+  background-color: #79a6d2; }
 .primary-colors .swatch8 {
-  background-color: #9fb3c6; }
+  background-color: #98badd; }
 .primary-colors .swatch9 {
-  background-color: #bfccd9; }
+  background-color: #b3cce6; }
 
 .secondary-colors .swatch1 {
   background-color: #d28579; }

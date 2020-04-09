@@ -10,12 +10,43 @@
         <title>Kristine & Samuel's Wedding - Dashboard</title>
         <link rel="stylesheet" href="/styles/app.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <script src='js/dashboard.js' defer></script>
+        <script src='/fontawesome-free-5.13.0-web/js/all.js' defer></script>
     </head>
     <body>
+        <header>
 
+        </header>
         <main>
-            <button id='add-guest'>Add Guest</button>
-        </main>
+            <section class='guest-container'>
+                <section class='button-container'>
+                    <button id='add-guest' class='btn btn-primary'>Add Household</button>
+                    <button id='add-guest' class='btn btn-primary'>Add Guest</button>
+                    <input type="text" id="filter-guests" placeholder="Filter..">
+                </section>
+                
+                <section id='rsvp-count'>
+                    <h3>RSVP Count</h3>
+                </section>
+            </section>
+                <div class="table-responsive">
+                    <table class="table table-sm">
+                        <thead>
+                            <tr>
+                                <th scope="col">First Name</th>
+                                <th scope="col">Last Name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Phone #</th>
+                                <th scope="col">RSVP</i></th>
+                                <th scope="col">Household</th>
+                            </tr>
+                        </thead>
+                        <tbody id='guest-list'>
+                        </tbody>
+                    </table>
+                </div>
+            </main>
         <footer>
             <script src="js/footer.js"></script>
         </footer>
