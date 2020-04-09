@@ -1,0 +1,23 @@
+{
+  "name": "wedding-website",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "tabulator-tables": "^4.6.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kadrianne/wedding-website.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kadrianne/wedding-website/issues"
+  },
+  "homepage": "https://github.com/kadrianne/wedding-website#readme"
+}

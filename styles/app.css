@@ -8,18 +8,19 @@ body {
   flex-direction: column; }
 
 header {
-  background-color: #5e8cba;
+  background-color: #6699cc;
   padding-top: 20px;
-  text-align: center; }
+  text-align: center;
+  min-height: 7vh; }
   header .heading {
-    color: #084d91;
+    color: #174d82;
     font-size: 40px;
     letter-spacing: 1px;
     font-family: 'Playfair Display', serif;
     font-weight: 500;
     margin: auto; }
   header .tagline {
-    color: #084d91;
+    color: #174d82;
     font-size: 20px;
     font-weight: 300; }
   header .menu {
@@ -50,23 +51,51 @@ header {
     border-style: solid;
     color: #ffd3cc; }
 
-.sticky {
-  position: fixed;
-  top: 0;
-  width: 100%; }
+@media only screen and (min-width: 600px) {
+  .sticky {
+    position: fixed;
+    top: 0;
+    width: 100%; }
 
-.sticky + main {
-  padding-top: 146px; }
-
+  .sticky + main {
+    padding-top: 146px; } }
 main {
   min-height: 100vh;
   background-color: #f0f2f4;
-  color: #4080bf;
-  text-align: center; }
+  color: #538cc6;
+  text-align: center;
+  padding-left: 100px;
+  padding-right: 100px; }
+  main img {
+    padding-bottom: 25px; }
+  main .guest-container {
+    display: flex;
+    justify-content: space-between; }
 
+.button-container {
+  display: flex;
+  align-items: flex-end;
+  padding-top: 20px;
+  padding-bottom: 10px; }
+  .button-container button {
+    background-color: #4080bf !important;
+    color: #f0f2f4;
+    border-color: #538cc6;
+    margin-right: 5px; }
+  .button-container button:hover {
+    background-color: #f0f2f4 !important;
+    color: #4080bf; }
+
+@media only screen and (max-width: 600px) {
+  main {
+    padding-left: 20px;
+    padding-right: 20px;
+    min-height: 75vh; }
+    main img {
+      width: 100%; } }
 footer {
   text-align: center;
-  background-color: #5e8cba;
+  background-color: #6699cc;
   color: #f0f2f4;
   padding-top: 25px;
   padding-bottom: 25px;
@@ -77,7 +106,7 @@ h1 {
   letter-spacing: 1px;
   padding-top: 25px;
   padding-bottom: 25px;
-  color: #0f66bd;
+  color: #2966a3;
   font-weight: 500;
   font-size: 30px; }
 
@@ -86,36 +115,75 @@ h2 {
   letter-spacing: 1px;
   padding-top: 25px;
   padding-bottom: 25px;
-  color: #0f66bd;
+  color: #2966a3;
   font-weight: 500;
   font-size: 24px; }
+
+h3 {
+  font-weight: 700;
+  font-size: 20px;
+  text-decoration: underline;
+  padding-bottom: 5px; }
+
+h4 {
+  font-weight: 700;
+  font-size: 20px;
+  padding-bottom: 5px; }
 
 form p {
   padding-bottom: 15px;
   color: #98a6b3;
   line-height: 120%; }
+form div {
+  text-align: left; }
+  form div label {
+    padding-bottom: 3px; }
+  form div ::placeholder {
+    color: #d3d9de; }
+form .error-messages {
+  text-align: left;
+  color: red !important;
+  font-size: 14px;
+  padding-bottom: 10px; }
 
 .login {
   background-color: white;
   padding: 30px 30px 30px 30px;
-  display: inline-block;
-  width: 400px; }
-  .login .btn {
-    background-color: #ec9f93 !important;
-    border-color: #ffd3cc !important; }
-  .login .btn:hover {
-    background-color: white !important;
-    color: #ec9f93; }
-  .login div {
-    text-align: left; }
-    .login div label {
-      padding-bottom: 3px; }
-    .login div ::placeholder {
-      color: #d3d9de; }
-  .login .error-messages {
-    text-align: left;
-    color: red !important;
-    font-size: 14px;
-    padding-bottom: 10px; }
+  display: inline-block; }
+
+table thead {
+  background-color: #b3cce6;
+  color: #0f3357; }
+
+.narrow-table {
+  width: 40%; }
+
+.fa-heart {
+  color: #ec9f93; }
+
+.fa-frown {
+  color: #174d82; }
+
+.fa-question {
+  color: #7b8c9d; }
+
+#rsvp-count {
+  text-align: center; }
+
+.success-message {
+  color: #339933; }
+
+.m-scene .scene_element {
+  animation-duration: 1s;
+  transition-timing-function: ease-in;
+  animation-fill-mode: both; }
+.m-scene .scene_element--fadein {
+  animation-name: fadeIn; }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
 
 /*# sourceMappingURL=app.css.map */
