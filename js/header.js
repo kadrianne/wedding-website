@@ -1,13 +1,16 @@
 const menuLinks = [
     {
         title: "save the date",
-        url: "/"
+        url: "/home.html"
     },{
         title: "club paradise",
-        url:"/club-paradise"
+        url:"/club-paradise.html"
+    },{
+        title: "rsvp",
+        url:"/rsvp.html"
     },{
         title: "contact",
-        url:"/contact"
+        url:"/contact.html"
     }
 ]
 
@@ -18,7 +21,7 @@ function buildHeader() {
     addHeading(header)
     addTagline(header)
     createMenu(header)
-    document.addEventListener('scroll', makeHeaderSticky)
+    document.addEventListener('scroll', makeHeaderSticky(header))
 }
 
 function addHeading(header){
@@ -62,13 +65,14 @@ function createMenu(header){
     header.append(menu)
 }
 
-function makeHeaderSticky(){
-    const header = document.querySelector('header');
-    const sticky = header.offsetTop;
-
-    if (window.pageYOffset > sticky) {
-        header.classList.add("sticky");
-    } else {
-        header.classList.remove("sticky");
+function makeHeaderSticky(header){
+    return () => {
+        const sticky = header.offsetTop
+        
+        if (window.pageYOffset > sticky) {
+            header.classList.add("sticky")
+        } else {
+            header.classList.remove("sticky")
+        }
     }
 }

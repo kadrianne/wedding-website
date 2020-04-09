@@ -20,33 +20,73 @@
         <main>
             <section class='guest-container'>
                 <section class='button-container'>
-                    <button id='add-guest' class='btn btn-primary'>Add Household</button>
                     <button id='add-guest' class='btn btn-primary'>Add Guest</button>
                     <input type="text" id="filter-guests" placeholder="Filter..">
                 </section>
-                
                 <section id='rsvp-count'>
                     <h3>RSVP Count</h3>
                 </section>
             </section>
-                <div class="table-responsive">
-                    <table class="table table-sm">
-                        <thead>
-                            <tr>
-                                <th scope="col">First Name</th>
-                                <th scope="col">Last Name</th>
-                                <th scope="col">Age</th>
-                                <th scope="col">Email</th>
-                                <th scope="col">Phone #</th>
-                                <th scope="col">RSVP</i></th>
-                                <th scope="col">Household</th>
-                            </tr>
-                        </thead>
-                        <tbody id='guest-list'>
-                        </tbody>
-                    </table>
+            <div class="table-responsive">
+                <table class="table table-sm">
+                    <thead>
+                        <tr>
+                            <th scope="col">First Name</th>
+                            <th scope="col">Last Name</th>
+                            <th scope="col">Age</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Phone #</th>
+                            <th scope="col">RSVP</i></th>
+                            <th scope="col">Household</th>
+                        </tr>
+                    </thead>
+                    <tbody id='guest-list'>
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal fade" id="add-household-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="add-household-modal-label">Add Household</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id='add-household-form'>
+                                <div class="form-group">
+                                    <label for="family-field" class="col-form-label">Family:</label>
+                                    <input type="text" class="form-control" id="family-field" name='family'>
+                                </div>
+                                <div class="form-group">
+                                    <label for="region-field" class="col-form-label">Region:</label>
+                                    <input class="form-control" id="region-field" name='region'></input>
+                                </div>
+                                <p class='success-message'></p>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
-            </main>
+            </div>
+            <section class='button-container'>
+                <button id='add-household' class='btn btn-primary' data-toggle='modal' data-target="#add-household-modal">Add Household</button>
+            </section>
+            <div class="table-responsive">
+                <table class="table table-sm narrow-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Family Name</th>
+                            <th scope="col">Region</th>
+                            <th scope="col">Guests</th>
+                        </tr>
+                    </thead>
+                    <tbody id='household-list'>
+                    </tbody>
+                </table>
+            </div>
+        </main>
         <footer>
             <script src="js/footer.js"></script>
         </footer>

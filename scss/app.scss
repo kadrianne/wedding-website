@@ -15,6 +15,7 @@ header {
     background-color: $primary-color-6;
     padding-top: 20px;
     text-align: center;
+    min-height: 7vh;
     
     .heading {
         color: $primary-color-2;
@@ -73,14 +74,16 @@ header {
     }
 }
 
-.sticky {
-    position: fixed;
-    top: 0;
-    width: 100%
-}
+@media only screen and (min-width: 600px) {
+    .sticky {
+        position: fixed;
+        top: 0;
+        width: 100%
+    }
 
-.sticky + main {
-    padding-top: 146px;
+    .sticky + main {
+        padding-top: 146px;
+    }
 }
 
 main {
@@ -90,28 +93,47 @@ main {
     text-align: center;
     padding-left: 100px;
     padding-right: 100px;
+    // display: flex;
+    // flex-direction: column;
+    // align-content: space-around;
+
+    img {
+        padding-bottom: 25px;
+    }
 
     .guest-container {
         display: flex;
         justify-content: space-between;
-        padding-top: 20px;
-        padding-bottom: 10px;
+    }
+}
 
-        .button-container {
-            display: flex;
-            align-items: flex-end;
-            
-            button {
-                background-color: $primary-color-4 !important;
-                color: $grey-9;
-                border-color: $primary-color-5;
-                margin-right: 5px;
-            }
+.button-container {
+    display: flex;
+    align-items: flex-end;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    
+    button {
+        background-color: $primary-color-4 !important;
+        color: $grey-9;
+        border-color: $primary-color-5;
+        margin-right: 5px;
+    }
 
-            button:hover {
-                background-color: $grey-9 !important;
-                color: $primary-color-4;
-            }
+    button:hover {
+        background-color: $grey-9 !important;
+        color: $primary-color-4;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    main {
+        padding-left: 20px;
+        padding-right: 20px;
+        min-height: 75vh;
+
+        img {
+            width: 100%;
         }
     }
 }
@@ -152,28 +174,17 @@ h3 {
     padding-bottom: 5px;
 }
 
+h4 {
+    font-weight: 700;
+    font-size: $font-baseline;
+    padding-bottom: 5px;
+}
+
 form {
     p {
         padding-bottom: 15px;
         color: $grey-5;
         line-height: 120%;
-    }
-}
-    
-.login {
-    background-color: white;
-    padding: 30px 30px 30px 30px;
-    display: inline-block;
-    width: 400px;
-    
-    .btn {
-        background-color: $secondary-color-2 !important;
-        border-color: $secondary-color-4 !important;
-    }
-    
-    .btn:hover {
-        background-color: white !important;
-        color: $secondary-color-2;
     }
     
     div {
@@ -182,7 +193,6 @@ form {
         label {
             padding-bottom: 3px;
         }
-        
         
         ::placeholder {
             color: $grey-7;
@@ -196,12 +206,24 @@ form {
         padding-bottom: 10px;
     }
 }
+    
+.login {
+    background-color: white;
+    padding: 30px 30px 30px 30px;
+    display: inline-block;
+    // width: 400px;
+}
 
 table {
     thead {
         background-color: $primary-color-9;
         color: $primary-color-1;
     }
+
+}
+
+.narrow-table {
+    width: 40%;
 }
 
 .fa-heart {
@@ -218,4 +240,31 @@ table {
 
 #rsvp-count {
     text-align: center;
+}
+
+.success-message {
+    color: hsl(120,50%,40)
+}
+
+// Animation code from https://css-tricks.com/add-page-transitions-css-smoothstate-js/
+.m-scene {
+    .scene_element {
+        animation-duration: 1s;
+        transition-timing-function: ease-in;
+        animation-fill-mode: both;
+    }
+
+    .scene_element--fadein {
+        animation-name: fadeIn;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
