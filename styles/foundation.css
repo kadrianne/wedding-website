@@ -1,0 +1,76 @@
+.responsive-card-table {
+  border-collapse: collapse; }
+  .responsive-card-table.unstriped tbody {
+    background-color: transparent; }
+  .responsive-card-table th {
+    background-color: #b3cce6; }
+  .responsive-card-table tr,
+  .responsive-card-table th,
+  .responsive-card-table td {
+    border: 1px solid #d3d9de; }
+  .responsive-card-table th, .responsive-card-table td {
+    padding: 5px 5px 5px 5px; }
+  @media screen and (max-width: 640px) {
+    .responsive-card-table {
+      /* Get table cells to act like rows */ }
+      .responsive-card-table thead tr {
+        position: absolute;
+        top: -9999em;
+        left: -9999em; }
+      .responsive-card-table tr {
+        border: 1px solid #d3d9de;
+        display: block; }
+      .responsive-card-table tr + tr {
+        margin-top: 1.5rem; }
+      .responsive-card-table td {
+        border: none;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        border-bottom: 1px solid #d3d9de;
+        padding-left: 50%;
+        position: relative; }
+        .responsive-card-table td:before {
+          content: attr(data-label);
+          display: inline-block;
+          font-weight: bold;
+          line-height: 1.5;
+          margin-left: -100%;
+          width: 100%;
+          position: relative;
+          z-index: 1; }
+        .responsive-card-table td:after {
+          content: '';
+          position: absolute;
+          background: #b3cce6;
+          width: 45%;
+          height: 95%;
+          left: 1px;
+          top: 1px;
+          z-index: 0; } }
+
+.stats-list {
+  list-style-type: none;
+  clear: left;
+  margin: 0;
+  padding: 0;
+  text-align: center; }
+  .stats-list > li {
+    display: inline-block;
+    margin-right: 10px;
+    padding-right: 10px;
+    border-right: 1px solid #98a6b3;
+    text-align: center;
+    font-size: 1.1em;
+    font-weight: bold; }
+    .stats-list > li:last-child {
+      border: none;
+      margin: 0;
+      padding: 0; }
+    .stats-list > li .stats-list-label {
+      display: block;
+      margin-top: 2px;
+      font-size: 0.9em;
+      font-weight: normal; }
+
+/*# sourceMappingURL=foundation.css.map */

@@ -122,10 +122,11 @@ h2 {
   font-size: 24px; }
 
 h3 {
+  color: #4080bf;
   font-weight: 700;
   font-size: 20px;
   text-decoration: underline;
-  padding-bottom: 5px; }
+  padding-bottom: 10px; }
 
 h4 {
   font-weight: 700;
@@ -168,9 +169,8 @@ form .error-messages {
 table thead {
   background-color: #b3cce6;
   color: #0f3357; }
-
-.narrow-table {
-  width: 40%; }
+table tbody {
+  color: #627384; }
 
 .icon {
   border: none;
@@ -196,9 +196,6 @@ table thead {
 .fa-trash-alt {
   color: #98a6b3;
   cursor: pointer; }
-
-#rsvp-count {
-  text-align: center; }
 
 .success-message {
   padding-top: 10px;

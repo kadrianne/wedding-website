@@ -113,18 +113,19 @@ function renderGuest(guest){
 }
 
 function countRSVPS(guests){
-    const rsvpCount = document.querySelector('#rsvp-count')
-    const attending = document.createElement('p')
-    const notAttending = document.createElement('p')
-    const noRSVP = document.createElement('p')
+    const rsvpCount = document.querySelector('#rsvp-count .stats-list')
+    console.log(rsvpCount)
+    const attending = document.createElement('li')
+    const notAttending = document.createElement('li')
+    const noRSVP = document.createElement('li')
 
     const attendingCount = guests.filter(guest => guest.rsvp == true).length
     const notAttendingCount = guests.filter(guest => guest.rsvp == false).length
     const noRSVPCount = guests.filter(guest => guest.rsvp == null || undefined).length
 
-    attending.innerHTML = `${guestRSVP.true} Attending: ${attendingCount}</b><br>`
-    notAttending.innerHTML = `${guestRSVP.false} Not Attending: ${notAttendingCount}<br>`
-    noRSVP.innerHTML = `${guestRSVP.null} Not RSVP'd: ${noRSVPCount}<br>`
+    attending.innerHTML = `${guestRSVP.true} ${attendingCount}<span class="stats-list-label">Attending</span>`
+    notAttending.innerHTML = `${guestRSVP.false} ${notAttendingCount}<span class="stats-list-label">Not Attending</span>`
+    noRSVP.innerHTML = `${guestRSVP.null} ${noRSVPCount}<span class="stats-list-label">Not RSVP'd</span>`
 
     rsvpCount.append(attending,notAttending,noRSVP)
 }
@@ -153,6 +154,7 @@ addGuestForm.addEventListener('submit', (event) => {
 
     renderGuest(guest)
     postNewGuest(guest)
+    event.target.reset()
 })
 
 function postNewGuest(guest) {
@@ -179,6 +181,7 @@ addHouseholdForm.addEventListener('submit', (event) => {
     }
     renderHousehold(household)
     postNewHousehold(household)
+    event.target.reset()
 })
 
 function postNewHousehold(household) {
@@ -238,17 +241,17 @@ function addHouseholdsToDropdown(households){
 function handleResponse(response){
     const successMessage = document.querySelector('form > .success-message')
     successMessage.textContent = response.message
-    clearForm()
+    // clearForm()
 }
 
-function clearForm() {
-    const inputs = document.querySelectorAll('input')
-    const dropdowns = document.querySelectorAll('select')
+// function clearForm() {
+//     const inputs = document.querySelectorAll('input')
+//     const dropdowns = document.querySelectorAll('select')
 
-    inputs.forEach(input => {
-        input.value = ''
-    })
-    dropdowns.forEach(dropdown => {
-        dropdown.value = ''
-    })
-}
+//     inputs.forEach(input => {
+//         input.value = ''
+//     })
+//     dropdowns.forEach(dropdown => {
+//         dropdown.value = ''
+//     })
+// }

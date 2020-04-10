@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>Kristine & Samuel's Wedding - Dashboard</title>
         <link rel="stylesheet" href="/styles/app.css"/>
+        <link rel="stylesheet" href="/styles/foundation.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <script src='js/dashboard.js' defer></script>
         <link rel='stylesheet' href='/fontawesome-free-5.13.0-web/css/all.css'>
@@ -26,6 +27,8 @@
                 </section>
                 <section id='rsvp-count'>
                     <h3>RSVP Count</h3>
+                    <ul class="stats-list">
+                    </ul>                      
                 </section>
             </section>
             <!-- Add Guest Modal-->
@@ -93,25 +96,23 @@
                 </div>
             </div>
             <!-- Guest Table -->
-            <div class="table-responsive">
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone #</th>
-                            <th scope="col" width=60px>RSVP</i></th>
-                            <th scope="col" width=60px>More Info</i></th>
-                            <th scope="col" width=60px>Edit</i></th>
-                            <th scope="col" width=60px>Delete</i></th>
-                        </tr>
-                    </thead>
-                    <tbody id='guest-list'>
-                    </tbody>
-                </table>
-            </div>
+            <table class="responsive-card-table unstriped" width=100%>
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Phone #</th>
+                    <th width=60px>RSVP</th>
+                    <th width=60px>More Info</th>
+                    <th width=60px>Edit</th>
+                    <th width=60px>Delete</th>
+                  </tr>
+                </thead>
+                <tbody id='guest-list'>
+                </tbody>
+            </table>
             <!-- View Guest Modal -->
             <div class="modal fade" id="view-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -222,19 +223,17 @@
                 </div>
             </div>
             <!-- Household Table -->
-            <div class="table-responsive">
-                <table class="table table-sm narrow-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Family Name</th>
-                            <th scope="col">Region</th>
-                            <th scope="col">Guests</th>
-                        </tr>
-                    </thead>
-                    <tbody id='household-list'>
-                    </tbody>
-                </table>
-            </div>
+            <table class="responsive-card-table unstriped" width=40%>
+                <thead>
+                  <tr>
+                    <th>Family Name</th>
+                    <th>Region</th>
+                    <th>Guests</th>
+                  </tr>
+                </thead>
+                <tbody id='household-list'>
+                </tbody>
+            </table>
         </main>
         <footer>
             <script src="js/footer.js"></script>

@@ -1,0 +1,113 @@
+@import 'colors';
+
+// Responsive Table Building Block - https://get.foundation/building-blocks/blocks/responsive-card-table.html
+$responsive-card-table-bottom-gap: 1.5rem;
+$responsive-card-table-border: 1px solid $grey-7;
+$responsive-card-table-stack-point: 640px;
+$responsive-card-table-label-bg: $primary-color-9;
+
+.responsive-card-table {
+  border-collapse: collapse;
+
+  &.unstriped tbody {
+    background-color: transparent;
+  }
+
+  th {
+    background-color: $responsive-card-table-label-bg;
+  }
+
+  tr,
+  th,
+  td {
+    border: $responsive-card-table-border;
+  }
+
+  th, td {
+    padding: 5px 5px 5px 5px;
+  }
+
+  @media screen and (max-width: $responsive-card-table-stack-point) {
+    thead tr {
+      position: absolute;
+      top: -9999em;
+      left: -9999em;
+    }
+
+    tr {
+      border: $responsive-card-table-border;
+      display: block;
+    }
+
+    tr + tr {
+      margin-top: $responsive-card-table-bottom-gap;
+    }
+    /* Get table cells to act like rows */
+
+    td {
+      border: none;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      border-bottom: $responsive-card-table-border;
+      padding-left: 50%;
+      position: relative;
+
+      &:before {
+        content: attr(data-label);
+        display: inline-block;
+        font-weight: bold;
+        line-height: 1.5;
+        margin-left: -100%;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+
+      &:after {
+        content: '';
+        position: absolute;
+        background: $responsive-card-table-label-bg;
+        width: 45%;
+        height: 95%;
+        left: 1px;
+        top: 1px;
+        z-index: 0;
+      }
+    }
+  }
+}
+
+// Stats List Building Block - https://get.foundation/building-blocks/blocks/stats-list.html
+.stats-list {
+    list-style-type: none;
+    clear: left;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+
+    & > li {
+      display: inline-block;
+      margin-right: 10px;
+      padding-right: 10px;
+      border-right: 1px solid $grey-5;
+      text-align: center;
+      font-size: 1.1em;
+      font-weight: bold;
+  
+      &:last-child {
+        border: none;
+        margin: 0;
+        padding: 0;
+      }
+  
+      .stats-list-label {
+        display: block;
+        margin-top: 2px;
+        font-size: 0.9em;
+        font-weight: normal;
+      }
+    }
+  }
+  
+  
