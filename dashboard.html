@@ -11,13 +11,14 @@
         <link rel="stylesheet" href="/styles/app.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <script src='js/dashboard.js' defer></script>
-        <script src='/fontawesome-free-5.13.0-web/js/all.js' defer></script>
+        <link rel='stylesheet' href='/fontawesome-free-5.13.0-web/css/all.css'>
     </head>
     <body>
         <header>
 
         </header>
         <main>
+            <!-- Guest Section -->
             <section class='guest-container'>
                 <section class='button-container'>
                     <button id='add-guest' class='btn btn-primary' data-toggle='modal' data-target="#add-guest-modal">Add Guest</button>
@@ -27,6 +28,7 @@
                     <h3>RSVP Count</h3>
                 </section>
             </section>
+            <!-- Add Guest Modal-->
             <div class="modal fade" id="add-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -51,7 +53,12 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="ageField" class="col-form-label">Age:</label>
-                                        <input type="text" class="form-control" id="ageField" name='age'>
+                                        <select class="form-control" id="ageField" name='age'>
+                                            <option value=''></option>
+                                            <option value='Adult 12+'>Adult 12+</option>
+                                            <option value='Child 3-12'>Child 3-12</option>
+                                            <option value='Baby 0-3'>Baby 0-3</option>
+                                        </select>
                                     </div>
                                     <div class="col">
                                         <label for="householdField" class="col-form-label">Household:</label>
@@ -72,7 +79,7 @@
                                     <div class="col">
                                         <label for="rsvpField" class="col-form-label">RSVP:</label>
                                         <select class="form-control" id="rsvpField" name='rsvp'>
-                                            <option></option>
+                                            <option value='null'></option>
                                             <option value='true'>Attending</option>
                                             <option value='false'>Not Attending</option>
                                         </select>
@@ -85,6 +92,7 @@
                     </div>
                 </div>
             </div>
+            <!-- Guest Table -->
             <div class="table-responsive">
                 <table class="table table-sm">
                     <thead>
@@ -94,15 +102,36 @@
                             <th scope="col">Age</th>
                             <th scope="col">Email</th>
                             <th scope="col">Phone #</th>
-                            <th scope="col">RSVP</i></th>
-                            <th scope="col">Edit</i></th>
-                            <th scope="col">Delete</i></th>
+                            <th scope="col" width=60px>RSVP</i></th>
+                            <th scope="col" width=60px>More Info</i></th>
+                            <th scope="col" width=60px>Edit</i></th>
+                            <th scope="col" width=60px>Delete</i></th>
                         </tr>
                     </thead>
                     <tbody id='guest-list'>
                     </tbody>
                 </table>
             </div>
+            <!-- View Guest Modal -->
+            <div class="modal fade" id="view-guest" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel">Guest Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                    </div>
+                    <div class="modal-body">
+                    Modal Body
+                    </div>
+                </div>
+                </div>
+            </div>
+            <!-- Add Household Modal -->
+            <section class='button-container'>
+                <button id='add-household' class='btn btn-primary' data-toggle='modal' data-target="#add-household-modal">Add Household</button>
+            </section>
             <div class="modal fade" id="add-household-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -129,9 +158,7 @@
                     </div>
                 </div>
             </div>
-            <section class='button-container'>
-                <button id='add-household' class='btn btn-primary' data-toggle='modal' data-target="#add-household-modal">Add Household</button>
-            </section>
+            <!-- Household Table -->
             <div class="table-responsive">
                 <table class="table table-sm narrow-table">
                     <thead>

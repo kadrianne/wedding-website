@@ -104,6 +104,8 @@ main {
     .guest-container {
         display: flex;
         justify-content: space-between;
+        padding-top: 15px;
+        padding-bottom: 5px;
     }
 }
 
@@ -237,6 +239,11 @@ table {
     width: 40%;
 }
 
+.icon {
+    border: none;
+    background: transparent;
+}
+
 .fa-heart {
     color: $secondary-color-2;
 }
@@ -249,12 +256,19 @@ table {
     color: $grey-4;
 }
 
+.fa-eye {
+    color: $primary-color-3;
+    cursor: pointer;
+}
+
 .fa-edit {
     color: $primary-color-3;
+    cursor: pointer;
 }
 
 .fa-trash-alt {
     color: $grey-5;
+    cursor: pointer;
 }
 
 #rsvp-count {

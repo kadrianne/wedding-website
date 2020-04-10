@@ -70,7 +70,9 @@ main {
     padding-bottom: 25px; }
   main .guest-container {
     display: flex;
-    justify-content: space-between; }
+    justify-content: space-between;
+    padding-top: 15px;
+    padding-bottom: 5px; }
 
 .button-container {
   display: flex;
@@ -166,6 +168,10 @@ table thead {
 .narrow-table {
   width: 40%; }
 
+.icon {
+  border: none;
+  background: transparent; }
+
 .fa-heart {
   color: #ec9f93; }
 
@@ -175,11 +181,17 @@ table thead {
 .fa-question {
   color: #7b8c9d; }
 
+.fa-eye {
+  color: #2966a3;
+  cursor: pointer; }
+
 .fa-edit {
-  color: #2966a3; }
+  color: #2966a3;
+  cursor: pointer; }
 
 .fa-trash-alt {
-  color: #98a6b3; }
+  color: #98a6b3;
+  cursor: pointer; }
 
 #rsvp-count {
   text-align: center; }
