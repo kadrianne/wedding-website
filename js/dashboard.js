@@ -15,19 +15,23 @@ viewMoreInfo(guestList)
 function viewMoreInfo(guestList){
     guestList.addEventListener('click', (event) => {
         const buttonClass = event.target.className
-        const guestID = event.target.parentNode.parentNode.dataset.guestid
+        const rowDataSet = event.target.parentNode.parentNode.dataset
+        rowDataSet.target = '#view-guest-modal'
         if (buttonClass.match(/fa-eye/)) {
-            viewGuestInfo(guestID)
+            viewGuestInfo(rowDataSet.guestid)
         } else if (buttonClass.match(/fa-edit/)) {
-            editGuestInfo(guestID)
+            editGuestInfo(rowDataSet.guestid)
         } else if (buttonClass.match(/fa-trash-alt/)) {
-            deleteGuestInfo(guestID)
+            deleteGuestInfo(rowDataSet.guestid)
         }
     })
 }
 
 function viewGuestInfo(guestID){
-
+    const viewGuestModal = document.querySelector('#view-guest-modal')
+    fetch(`${backendURL}/guests/${guestID}`)
+        .then(response => response.json())
+        .then(results => console.log(results))
 }
 
 function editGuestInfo(guestID){
@@ -79,8 +83,8 @@ function renderGuest(guest){
     email.textContent = guest.email
     phone.textContent = guest.phone
     rsvp.innerHTML = guestRSVP[guest.rsvp]
-    moreInfoButton.innerHTML = `<i class="fas fa-eye"></i>`
-    editButton.innerHTML = `<i class="fas fa-edit"></i>`
+    moreInfoButton.innerHTML = `<i class="fas fa-eye" data-toggle='modal' data-target="#view-guest-modal"></i>`
+    editButton.innerHTML = `<i class="fas fa-edit" data-toggle='modal' data-target="#edit-guest-modal"></i>`
     deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`
     
     row.append(firstName,lastName,age,email,phone,rsvp,moreInfoButton,editButton,deleteButton)
