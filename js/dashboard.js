@@ -64,6 +64,10 @@ function countRSVPS(guests){
     rsvpCount.append(attending,notAttending,noRSVP)
 }
 
+const addGuestForm = document.querySelector('#add-guest-form')
+// addGuestForm.addEventListener('')
+
+
 const addHouseholdForm = document.querySelector('#add-household-form')
 addHouseholdForm.addEventListener('submit', (event) => {
     event.preventDefault()

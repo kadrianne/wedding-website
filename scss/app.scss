@@ -195,10 +195,21 @@ form {
         }
         
         ::placeholder {
-            color: $grey-7;
+            color: $grey-7 !important;
         }
     }
     
+    .btn {
+        background-color: $secondary-color-2 !important;
+        color: $grey-9;
+        border-color: $secondary-color-4 !important;
+    }
+    
+    .btn:hover {
+        background-color: white !important;
+        color: $secondary-color-2 !important;
+    }
+
     .error-messages {
         text-align: left;
         color: red !important;
@@ -211,7 +222,7 @@ form {
     background-color: white;
     padding: 30px 30px 30px 30px;
     display: inline-block;
-    // width: 400px;
+    width: 400px;
 }
 
 table {

@@ -20,13 +20,71 @@
         <main>
             <section class='guest-container'>
                 <section class='button-container'>
-                    <button id='add-guest' class='btn btn-primary'>Add Guest</button>
+                    <button id='add-guest' class='btn btn-primary' data-toggle='modal' data-target="#add-guest-modal">Add Guest</button>
                     <input type="text" id="filter-guests" placeholder="Filter..">
                 </section>
                 <section id='rsvp-count'>
                     <h3>RSVP Count</h3>
                 </section>
             </section>
+            <div class="modal fade" id="add-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="add-guest-modal-label">Add Guest</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id='add-guest-form'>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="firstNameField" class="col-form-label">First Name:</label>
+                                        <input type="text" class="form-control" id="firstNameField" name='first_name'>
+                                    </div>
+                                    <div class="col">
+                                        <label for="lastNameField" class="col-form-label">Last Name:</label>
+                                        <input class="form-control" id="lastNameField" name='last_name'></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="ageField" class="col-form-label">Age:</label>
+                                        <input type="text" class="form-control" id="ageField" name='age'>
+                                    </div>
+                                    <div class="col">
+                                        <label for="householdField" class="col-form-label">Household:</label>
+                                        <select class="form-control" id="householdField" name='household_id'>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="emailField" class="col-form-label">Email:</label>
+                                    <input class="form-control" id="emailField" name='email'></input>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="phoneField" class="col-form-label">Phone #:</label>
+                                        <input class="form-control" id="phoneField" name='phone'></input>
+                                    </div>
+                                    <div class="col">
+                                        <label for="rsvpField" class="col-form-label">RSVP:</label>
+                                        <select class="form-control" id="rsvpField" name='rsvp'>
+                                            <option></option>
+                                            <option value='true'>Attending</option>
+                                            <option value='false'>Not Attending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class='success-message'></p>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="table-responsive">
                 <table class="table table-sm">
                     <thead>
@@ -44,11 +102,11 @@
                     </tbody>
                 </table>
             </div>
-            <div class="modal fade" id="add-household-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="add-household-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-household-modal-label">Add Household</h5>
+                            <h4 class="modal-title" id="add-household-modal-label">Add Household</h4>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -56,12 +114,12 @@
                         <div class="modal-body">
                             <form id='add-household-form'>
                                 <div class="form-group">
-                                    <label for="family-field" class="col-form-label">Family:</label>
-                                    <input type="text" class="form-control" id="family-field" name='family'>
+                                    <label for="familyField" class="col-form-label">Family:</label>
+                                    <input type="text" class="form-control" id="familyField" name='family' placeholder="Enter family name">
                                 </div>
                                 <div class="form-group">
-                                    <label for="region-field" class="col-form-label">Region:</label>
-                                    <input class="form-control" id="region-field" name='region'></input>
+                                    <label for="regionField" class="col-form-label">Region:</label>
+                                    <input class="form-control" id="regionField" name='region' placeholder="Enter household location"></input>
                                 </div>
                                 <p class='success-message'></p>
                                 <button type="submit" class="btn btn-primary">Submit</button>

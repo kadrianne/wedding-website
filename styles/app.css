@@ -139,7 +139,14 @@ form div {
   form div label {
     padding-bottom: 3px; }
   form div ::placeholder {
-    color: #d3d9de; }
+    color: #d3d9de !important; }
+form .btn {
+  background-color: #ec9f93 !important;
+  color: #f0f2f4;
+  border-color: #ffd3cc !important; }
+form .btn:hover {
+  background-color: white !important;
+  color: #ec9f93 !important; }
 form .error-messages {
   text-align: left;
   color: red !important;
@@ -149,7 +156,8 @@ form .error-messages {
 .login {
   background-color: white;
   padding: 30px 30px 30px 30px;
-  display: inline-block; }
+  display: inline-block;
+  width: 400px; }
 
 table thead {
   background-color: #b3cce6;
