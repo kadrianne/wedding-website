@@ -9,6 +9,7 @@
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>Kristine & Samuel's Wedding - Dashboard</title>
         <link rel="stylesheet" href="/styles/app.css"/>
+        <link rel="stylesheet" href="/styles/foundation.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
         <script src='js/dashboard.js' defer></script>
         <link rel='stylesheet' href='/fontawesome-free-5.13.0-web/css/all.css'>
@@ -26,6 +27,8 @@
                 </section>
                 <section id='rsvp-count'>
                     <h3>RSVP Count</h3>
+                    <ul class="stats-list">
+                    </ul>                      
                 </section>
             </section>
             <!-- Add Guest Modal-->
@@ -93,27 +96,25 @@
                 </div>
             </div>
             <!-- Guest Table -->
-            <div class="table-responsive">
-                <table class="table table-sm">
-                    <thead>
-                        <tr>
-                            <th scope="col">First Name</th>
-                            <th scope="col">Last Name</th>
-                            <th scope="col">Age</th>
-                            <th scope="col">Email</th>
-                            <th scope="col">Phone #</th>
-                            <th scope="col" width=60px>RSVP</i></th>
-                            <th scope="col" width=60px>More Info</i></th>
-                            <th scope="col" width=60px>Edit</i></th>
-                            <th scope="col" width=60px>Delete</i></th>
-                        </tr>
-                    </thead>
-                    <tbody id='guest-list'>
-                    </tbody>
-                </table>
-            </div>
+            <table class="responsive-card-table unstriped" width=100%>
+                <thead>
+                  <tr>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Age</th>
+                    <th>Email</th>
+                    <th>Phone #</th>
+                    <th width=60px>RSVP</th>
+                    <th width=60px>More Info</th>
+                    <th width=60px>Edit</th>
+                    <th width=60px>Delete</th>
+                  </tr>
+                </thead>
+                <tbody id='guest-list'>
+                </tbody>
+            </table>
             <!-- View Guest Modal -->
-            <div class="modal fade" id="view-guest" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal fade" id="view-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -122,10 +123,73 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                     </div>
-                    <div class="modal-body">
-                    Modal Body
+                    <div class="modal-body guest-info">
                     </div>
                 </div>
+                </div>
+            </div>
+            <!-- Edit Guest Modal -->
+            <div class="modal fade" id="edit-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="add-guest-modal-label">Edit Guest</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id='edit-guest-form'>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="editFirstNameField" class="col-form-label">First Name:</label>
+                                        <input type="text" class="form-control" id="editFirstNameField" name='first_name'>
+                                    </div>
+                                    <div class="col">
+                                        <label for="editLastNameField" class="col-form-label">Last Name:</label>
+                                        <input class="form-control" id="editLastNameField" name='last_name'></input>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="editAgeField" class="col-form-label">Age:</label>
+                                        <select class="form-control" id="editAgeField" name='age'>
+                                            <option value=''></option>
+                                            <option value='Adult 12+'>Adult 12+</option>
+                                            <option value='Child 3-12'>Child 3-12</option>
+                                            <option value='Baby 0-3'>Baby 0-3</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <label for="editHouseholdField" class="col-form-label">Household:</label>
+                                        <select class="form-control" id="editHouseholdField" name='household_id'>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="editEmailField" class="col-form-label">Email:</label>
+                                    <input class="form-control" id="editEmailField" name='email'></input>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="editPhoneField" class="col-form-label">Phone #:</label>
+                                        <input class="form-control" id="editPhoneField" name='phone'></input>
+                                    </div>
+                                    <div class="col">
+                                        <label for="editRsvpField" class="col-form-label">RSVP:</label>
+                                        <select class="form-control" id="editRsvpField" name='rsvp'>
+                                            <option value='null'></option>
+                                            <option value='true'>Attending</option>
+                                            <option value='false'>Not Attending</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <p class='success-message'></p>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- Add Household Modal -->
@@ -159,19 +223,17 @@
                 </div>
             </div>
             <!-- Household Table -->
-            <div class="table-responsive">
-                <table class="table table-sm narrow-table">
-                    <thead>
-                        <tr>
-                            <th scope="col">Family Name</th>
-                            <th scope="col">Region</th>
-                            <th scope="col">Guests</th>
-                        </tr>
-                    </thead>
-                    <tbody id='household-list'>
-                    </tbody>
-                </table>
-            </div>
+            <table class="responsive-card-table unstriped" width=40%>
+                <thead>
+                  <tr>
+                    <th>Family Name</th>
+                    <th>Region</th>
+                    <th>Guests</th>
+                  </tr>
+                </thead>
+                <tbody id='household-list'>
+                </tbody>
+            </table>
         </main>
         <footer>
             <script src="js/footer.js"></script>

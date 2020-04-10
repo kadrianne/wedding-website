@@ -15,19 +15,44 @@ viewMoreInfo(guestList)
 function viewMoreInfo(guestList){
     guestList.addEventListener('click', (event) => {
         const buttonClass = event.target.className
-        const guestID = event.target.parentNode.parentNode.dataset.guestid
+        const rowDataSet = event.target.parentNode.parentNode.dataset
+        rowDataSet.target = '#view-guest-modal'
         if (buttonClass.match(/fa-eye/)) {
-            viewGuestInfo(guestID)
+            viewGuestInfo(rowDataSet.guestid)
         } else if (buttonClass.match(/fa-edit/)) {
-            editGuestInfo(guestID)
+            editGuestInfo(rowDataSet.guestid)
         } else if (buttonClass.match(/fa-trash-alt/)) {
-            deleteGuestInfo(guestID)
+            deleteGuestInfo(rowDataSet.guestid)
         }
     })
 }
 
 function viewGuestInfo(guestID){
+    fetch(`${backendURL}/guests/${guestID}`)
+    .then(response => response.json())
+    .then(guest => displayGuestInfo(guest))
+}
 
+function displayGuestInfo(guest) {
+    const viewGuestModal = document.querySelector('#view-guest-modal .modal-body')
+    const name = document.createElement('h4')
+    const household = document.createElement('p')
+    const age = document.createElement('p')
+    const email = document.createElement('p')
+    const phone = document.createElement('p')
+    const rsvp = document.createElement('p')
+
+    console.log(guest)
+    viewGuestModal.innerHTML = ''
+    name.textContent = `${guest.first_name} ${guest.last_name}`
+    household.textContent = `Household: ${guest.household.family}`
+    age.textContent = `Age: ${guest.age}`
+    email.innerHTML = `E-mail: <a href="mailto:${guest.email}">${guest.email}</a>`
+    phone.textContent = `Phone #: ${guest.phone}`
+    rsvp.innerHTML = `RSVP: ${guestRSVP[guest.rsvp]}`
+
+    
+    viewGuestModal.append(name,household,age,email,phone,rsvp)
 }
 
 function editGuestInfo(guestID){
@@ -76,11 +101,11 @@ function renderGuest(guest){
     firstName.textContent = guest.first_name
     lastName.textContent = guest.last_name
     age.textContent = guest.age
-    email.textContent = guest.email
+    email.innerHTML = guest.email
     phone.textContent = guest.phone
     rsvp.innerHTML = guestRSVP[guest.rsvp]
-    moreInfoButton.innerHTML = `<i class="fas fa-eye"></i>`
-    editButton.innerHTML = `<i class="fas fa-edit"></i>`
+    moreInfoButton.innerHTML = `<i class="fas fa-eye" data-toggle='modal' data-target="#view-guest-modal"></i>`
+    editButton.innerHTML = `<i class="fas fa-edit" data-toggle='modal' data-target="#edit-guest-modal"></i>`
     deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`
     
     row.append(firstName,lastName,age,email,phone,rsvp,moreInfoButton,editButton,deleteButton)
@@ -88,18 +113,19 @@ function renderGuest(guest){
 }
 
 function countRSVPS(guests){
-    const rsvpCount = document.querySelector('#rsvp-count')
-    const attending = document.createElement('p')
-    const notAttending = document.createElement('p')
-    const noRSVP = document.createElement('p')
+    const rsvpCount = document.querySelector('#rsvp-count .stats-list')
+    console.log(rsvpCount)
+    const attending = document.createElement('li')
+    const notAttending = document.createElement('li')
+    const noRSVP = document.createElement('li')
 
     const attendingCount = guests.filter(guest => guest.rsvp == true).length
     const notAttendingCount = guests.filter(guest => guest.rsvp == false).length
     const noRSVPCount = guests.filter(guest => guest.rsvp == null || undefined).length
 
-    attending.innerHTML = `${guestRSVP.true} Attending: ${attendingCount}</b><br>`
-    notAttending.innerHTML = `${guestRSVP.false} Not Attending: ${notAttendingCount}<br>`
-    noRSVP.innerHTML = `${guestRSVP.null} Not RSVP'd: ${noRSVPCount}<br>`
+    attending.innerHTML = `${guestRSVP.true} ${attendingCount}<span class="stats-list-label">Attending</span>`
+    notAttending.innerHTML = `${guestRSVP.false} ${notAttendingCount}<span class="stats-list-label">Not Attending</span>`
+    noRSVP.innerHTML = `${guestRSVP.null} ${noRSVPCount}<span class="stats-list-label">Not RSVP'd</span>`
 
     rsvpCount.append(attending,notAttending,noRSVP)
 }
@@ -128,6 +154,7 @@ addGuestForm.addEventListener('submit', (event) => {
 
     renderGuest(guest)
     postNewGuest(guest)
+    event.target.reset()
 })
 
 function postNewGuest(guest) {
@@ -154,6 +181,7 @@ addHouseholdForm.addEventListener('submit', (event) => {
     }
     renderHousehold(household)
     postNewHousehold(household)
+    event.target.reset()
 })
 
 function postNewHousehold(household) {
@@ -213,17 +241,17 @@ function addHouseholdsToDropdown(households){
 function handleResponse(response){
     const successMessage = document.querySelector('form > .success-message')
     successMessage.textContent = response.message
-    clearForm()
+    // clearForm()
 }
 
-function clearForm() {
-    const inputs = document.querySelectorAll('input')
-    const dropdowns = document.querySelectorAll('select')
+// function clearForm() {
+//     const inputs = document.querySelectorAll('input')
+//     const dropdowns = document.querySelectorAll('select')
 
-    inputs.forEach(input => {
-        input.value = ''
-    })
-    dropdowns.forEach(dropdown => {
-        dropdown.value = ''
-    })
-}
+//     inputs.forEach(input => {
+//         input.value = ''
+//     })
+//     dropdowns.forEach(dropdown => {
+//         dropdown.value = ''
+//     })
+// }

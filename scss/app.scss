@@ -170,10 +170,11 @@ h2 {
 }
 
 h3 {
+    color: $primary-color-4;
     font-weight: 700;
     font-size: $font-baseline;
     text-decoration: underline;
-    padding-bottom: 5px;
+    padding-bottom: 10px;
 }
 
 h4 {
@@ -227,16 +228,20 @@ form {
     width: 400px;
 }
 
+.guest-info {
+    text-align: left !important;
+    line-height: 200%;
+}
+
 table {
     thead {
         background-color: $primary-color-9;
         color: $primary-color-1;
     }
 
-}
-
-.narrow-table {
-    width: 40%;
+    tbody {
+        color: $grey-3;
+    }
 }
 
 .icon {
@@ -271,13 +276,9 @@ table {
     cursor: pointer;
 }
 
-#rsvp-count {
-    text-align: center;
-}
-
 .success-message {
     padding-top: 10px;
-    color: hsl(120,50%,40)
+    color: $success-color
 }
 
 // Animation code from https://css-tricks.com/add-page-transitions-css-smoothstate-js/
