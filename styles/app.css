@@ -175,10 +175,17 @@ table thead {
 .fa-question {
   color: #7b8c9d; }
 
+.fa-edit {
+  color: #2966a3; }
+
+.fa-trash-alt {
+  color: #98a6b3; }
+
 #rsvp-count {
   text-align: center; }
 
 .success-message {
+  padding-top: 10px;
   color: #339933; }
 
 .m-scene .scene_element {
