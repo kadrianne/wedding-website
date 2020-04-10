@@ -1,33 +1,63 @@
 const guestList = document.querySelector('#guest-list')
 const householdList = document.querySelector('#household-list')
-const guestFilter = document.querySelector('#filter-guests')
 const rows = guestList.getElementsByTagName("tr")
 const backendURL = 'http://localhost:3000'
 const guestRSVP = {
     true: '<i class="fas fa-heart"></i>',
     false: '<i class="far fa-frown"></i>',
-    null: '<i class="fas fa-question"></i>'
+    null: '<i class="fas fa-question"></i>',
+    undefined: '<i class="fas fa-question"></i>'
 }
 
-guestFilter.addEventListener('keyup', event => {
-    let searchTerm = guestFilter.value
-    rows.forEach( guest
-// NEED TO ADD STUFF
-    )
-})
+fetchGuests()
+viewMoreInfo(guestList)
 
-fetch(`${backendURL}/guests`)
-    .then(response => response.json())
-    .then(guests => displayGuests(guests))
+function viewMoreInfo(guestList){
+    guestList.addEventListener('click', (event) => {
+        const buttonClass = event.target.className
+        const guestID = event.target.parentNode.parentNode.dataset.guestid
+        if (buttonClass.match(/fa-eye/)) {
+            viewGuestInfo(guestID)
+        } else if (buttonClass.match(/fa-edit/)) {
+            editGuestInfo(guestID)
+        } else if (buttonClass.match(/fa-trash-alt/)) {
+            deleteGuestInfo(guestID)
+        }
+    })
+}
 
+function viewGuestInfo(guestID){
+
+}
+
+function editGuestInfo(guestID){
+    console.log(guestID)
+}
+
+function deleteGuestInfo(guestID){
+    console.log(guestID)
+}
+
+function filterGuests(){
+    const guestFilter = document.querySelector('#filter-guests')
+    // guestFilter.addEventListener('keyup', event => {
+    //     let searchTerm = guestFilter.value
+    //     rows.forEach( guest
+    //     )
+    // })
+}
+
+function fetchGuests(){
+    fetch(`${backendURL}/guests`)
+        .then(response => response.json())
+        .then(guests => {
+            displayGuests(guests)
+            countRSVPS(guests)
+        })
+}
 
 function displayGuests(guests){
-    
-    guests.forEach(guest => {
-        renderGuest(guest, guestRSVP)
-    })
-    
-    countRSVPS(guests)
+    guests.forEach(guest => {renderGuest(guest)})
 }
 
 function renderGuest(guest){
@@ -38,20 +68,22 @@ function renderGuest(guest){
     const email = document.createElement('td')
     const phone = document.createElement('td')
     const rsvp = document.createElement('td')
+    const moreInfoButton = document.createElement('td')
     const editButton = document.createElement('td')
     const deleteButton = document.createElement('td')
     
-    row.id = `guestid-${guest.id}`
+    row.dataset.guestid = guest.id
     firstName.textContent = guest.first_name
     lastName.textContent = guest.last_name
     age.textContent = guest.age
     email.textContent = guest.email
     phone.textContent = guest.phone
     rsvp.innerHTML = guestRSVP[guest.rsvp]
+    moreInfoButton.innerHTML = `<i class="fas fa-eye"></i>`
     editButton.innerHTML = `<i class="fas fa-edit"></i>`
     deleteButton.innerHTML = `<i class="fas fa-trash-alt"></i>`
     
-    row.append(firstName,lastName,age,email,phone,rsvp,editButton,deleteButton)
+    row.append(firstName,lastName,age,email,phone,rsvp,moreInfoButton,editButton,deleteButton)
     guestList.append(row)
 }
 
@@ -63,11 +95,11 @@ function countRSVPS(guests){
 
     const attendingCount = guests.filter(guest => guest.rsvp == true).length
     const notAttendingCount = guests.filter(guest => guest.rsvp == false).length
-    const noRSVPCount = guests.filter(guest => guest.rsvp == null).length
+    const noRSVPCount = guests.filter(guest => guest.rsvp == null || undefined).length
 
-    attending.innerHTML = `<i class="fas fa-heart"></i> Attending: <b>${attendingCount}</b><br>`
-    notAttending.innerHTML = `<i class="far fa-frown"></i> Not Attending: ${notAttendingCount}<br>`
-    noRSVP.innerHTML = `<i class="fas fa-question"></i> Not RSVP'd: ${noRSVPCount}<br>`
+    attending.innerHTML = `${guestRSVP.true} Attending: ${attendingCount}</b><br>`
+    notAttending.innerHTML = `${guestRSVP.false} Not Attending: ${notAttendingCount}<br>`
+    noRSVP.innerHTML = `${guestRSVP.null} Not RSVP'd: ${noRSVPCount}<br>`
 
     rsvpCount.append(attending,notAttending,noRSVP)
 }
@@ -176,7 +208,6 @@ function addHouseholdsToDropdown(households){
 
         householdDropdown.appendChild(householdOption)
     })
-
 }
 
 function handleResponse(response){
