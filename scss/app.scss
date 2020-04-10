@@ -249,11 +249,20 @@ table {
     color: $grey-4;
 }
 
+.fa-edit {
+    color: $primary-color-3;
+}
+
+.fa-trash-alt {
+    color: $grey-5;
+}
+
 #rsvp-count {
     text-align: center;
 }
 
 .success-message {
+    padding-top: 10px;
     color: hsl(120,50%,40)
 }
 
