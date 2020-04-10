@@ -161,6 +161,10 @@ form .error-messages {
   display: inline-block;
   width: 400px; }
 
+.guest-info {
+  text-align: left !important;
+  line-height: 200%; }
+
 table thead {
   background-color: #b3cce6;
   color: #0f3357; }

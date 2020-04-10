@@ -28,10 +28,31 @@ function viewMoreInfo(guestList){
 }
 
 function viewGuestInfo(guestID){
-    const viewGuestModal = document.querySelector('#view-guest-modal')
     fetch(`${backendURL}/guests/${guestID}`)
-        .then(response => response.json())
-        .then(results => console.log(results))
+    .then(response => response.json())
+    .then(guest => displayGuestInfo(guest))
+}
+
+function displayGuestInfo(guest) {
+    const viewGuestModal = document.querySelector('#view-guest-modal .modal-body')
+    const name = document.createElement('h4')
+    const household = document.createElement('p')
+    const age = document.createElement('p')
+    const email = document.createElement('p')
+    const phone = document.createElement('p')
+    const rsvp = document.createElement('p')
+
+    console.log(guest)
+    viewGuestModal.innerHTML = ''
+    name.textContent = `${guest.first_name} ${guest.last_name}`
+    household.textContent = `Household: ${guest.household.family}`
+    age.textContent = `Age: ${guest.age}`
+    email.innerHTML = `E-mail: <a href="mailto:${guest.email}">${guest.email}</a>`
+    phone.textContent = `Phone #: ${guest.phone}`
+    rsvp.innerHTML = `RSVP: ${guestRSVP[guest.rsvp]}`
+
+    
+    viewGuestModal.append(name,household,age,email,phone,rsvp)
 }
 
 function editGuestInfo(guestID){
@@ -80,7 +101,7 @@ function renderGuest(guest){
     firstName.textContent = guest.first_name
     lastName.textContent = guest.last_name
     age.textContent = guest.age
-    email.textContent = guest.email
+    email.innerHTML = guest.email
     phone.textContent = guest.phone
     rsvp.innerHTML = guestRSVP[guest.rsvp]
     moreInfoButton.innerHTML = `<i class="fas fa-eye" data-toggle='modal' data-target="#view-guest-modal"></i>`
