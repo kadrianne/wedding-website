@@ -270,15 +270,17 @@ function displayHouseholds(households){
 }
 
 function addHouseholdsToDropdown(households){
-    const householdDropdown = document.querySelector('#householdField')
+    const householdDropdowns = document.querySelectorAll('.household-dropdown')
 
-    households.forEach(household => {
-        const householdOption = document.createElement('option')
-        
-        householdOption.textContent = `${household.family} - ${household.region}`
-        householdOption.value = household.id
-
-        householdDropdown.appendChild(householdOption)
+    householdDropdowns.forEach(dropdown => {
+        households.forEach(household => {
+            const householdOption = document.createElement('option')
+            
+            householdOption.textContent = `${household.family} - ${household.region}`
+            householdOption.value = household.id
+    
+            dropdown.appendChild(householdOption)
+        })
     })
 }
 
