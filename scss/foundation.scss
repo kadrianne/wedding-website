@@ -1,4 +1,6 @@
 @import 'colors';
+$offcanvas-transition-length: 5s;
+$offcanvas-transition-timing: ease;
 
 // Responsive Table Building Block - https://get.foundation/building-blocks/blocks/responsive-card-table.html
 $responsive-card-table-bottom-gap: 1.5rem;
@@ -109,5 +111,3 @@ $responsive-card-table-label-bg: $primary-color-9;
       }
     }
   }
-  
-  

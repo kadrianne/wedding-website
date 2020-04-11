@@ -172,6 +172,9 @@ table thead {
 table tbody {
   color: #627384; }
 
+.modal-header {
+  padding-bottom: 5px; }
+
 .icon {
   border: none;
   background: transparent; }
