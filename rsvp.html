@@ -9,59 +9,20 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel="stylesheet" href="/styles/app.css"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src='js/rsvp.js' defer></script>
     <title>Kristine & Samuel's Wedding - RSVP</title>
 </head>
 <body class='m-scene'>
-    <header>
+    <section class='unauthorized'>Unauthorized. Please <a href='/'>login</a> to view website.</section>
+    <header class='authorized'>
         <script src="js/header.js"></script>
     </header>
-    <main class='scene_element scene_element--fadein'>
-        <h1>RSVP</h1>
+    <main class='authorized scene_element scene_element--fadein'>
+        <h1></h1>
         <div class="guest-cards">
-            <div class="card">
-                <div class="card-header">Header</div>
-                <div class="card-body">
-                    <h5 class="card-title">Card title</h5>
-                    <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                    <div class="card-footer bg-transparent border-success">Footer</div>
-                </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-                <div class="card-footer bg-transparent">Footer</div>
-              </div>
-            </div>
-            <div class="card">
-              <div class="card-header">Header</div>
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-                <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                <div class="card-footer bg-transparent">Footer</div>
-              </div>
-            </div>
-            <div class="card">
-                <div class="card-header">Header</div>
-                <div class="card-body">
-                  <h5 class="card-title">Card title</h5>
-                  <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-                </div>
-                <div class="card-footer bg-transparent">Footer</div>
-              </div>
-          <div class="card">
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-            </div>
-            <div class="card-footer bg-transparent">Footer</div>
-          </div>
         </div>
-      </div>
     </main>
-    <footer>
+    <footer class='authorized'>
         <script src="js/footer.js"></script>
     </footer>
 </body>

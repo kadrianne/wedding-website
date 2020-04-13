@@ -196,7 +196,7 @@ function postNewGuest(guest) {
             'Content-type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(guest)
+        body: JSON.stringify({guest: guest})
     }).then(response => response.json())
         .then(result => {
             handleResponse(result)
