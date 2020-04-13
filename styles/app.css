@@ -11,7 +11,8 @@ header {
   background-color: #6699cc;
   padding-top: 20px;
   text-align: center;
-  min-height: 7vh; }
+  min-height: 7vh;
+  z-index: 1; }
   header .heading {
     color: #174d82;
     font-size: 40px;
@@ -51,7 +52,7 @@ header {
     border-style: solid;
     color: #ffd3cc; }
 
-@media only screen and (min-width: 600px) {
+@media (min-width: 1024px) {
   .sticky {
     position: fixed;
     top: 0;
@@ -74,10 +75,6 @@ main {
     padding-top: 15px;
     padding-bottom: 5px; }
 
-@media (max-width: 1340px) {
-  main {
-    padding-left: 10%;
-    padding-right: 10%; } }
 @media (max-width: 1124px) {
   main {
     padding-left: 15%;
@@ -96,7 +93,7 @@ main {
     background-color: #f0f2f4 !important;
     color: #4080bf; }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: 867px) {
   main {
     padding-left: 20px;
     padding-right: 20px;
@@ -175,17 +172,22 @@ form .error-messages {
   line-height: 200%; }
 
 .guest-cards {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between; }
+  display: inline-grid;
+  grid-template-columns: auto auto auto; }
 
-@media (max-width: 857px) {
+@media (max-width: 1340px) {
+  .guest-cards {
+    display: inline-grid;
+    grid-template-columns: auto auto; } }
+@media (max-width: 867px) {
   .guest-cards {
     display: flex;
+    flex-flow: row wrap;
     justify-content: center; } }
 .card {
-  margin-bottom: 20px;
-  width: 300px; }
+  margin: 20px;
+  min-width: 300px;
+  max-width: 300px; }
 
 table thead {
   background-color: #b3cce6;

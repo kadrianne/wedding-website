@@ -17,6 +17,7 @@ header {
     padding-top: 20px;
     text-align: center;
     min-height: 7vh;
+    z-index: 1;
     
     .heading {
         color: $primary-color-2;
@@ -75,7 +76,7 @@ header {
     }
 }
 
-@media only screen and (min-width: 600px) {
+@media (min-width: $breakpoint-narrow) {
     .sticky {
         position: fixed;
         top: 0;
@@ -107,14 +108,7 @@ main {
     }
 }
 
-@media (max-width: 1340px) {
-    main {
-        padding-left: 10%;
-        padding-right: 10%;
-    }
-}
-
-@media (max-width: 1124px) {
+@media (max-width: $breakpoint-baseline) {
     main {
         padding-left: 15%;
         padding-right: 15%;
@@ -140,7 +134,7 @@ main {
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media (max-width: $breakpoint-mobile) {
     main {
         padding-left: 20px;
         padding-right: 20px;
@@ -246,21 +240,29 @@ form {
 }
 
 .guest-cards {
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-between;
+    display: inline-grid;
+    grid-template-columns: auto auto auto;
 }
 
-@media (max-width: 857px) {
+@media (max-width: $breakpoint-wide) {
+    .guest-cards {
+        display: inline-grid;
+        grid-template-columns: auto auto;
+    }
+}
+
+@media (max-width: $breakpoint-mobile) {
     .guest-cards {
         display: flex;
+        flex-flow: row wrap;
         justify-content: center;
     }
 }
 
 .card {
-    margin-bottom: 20px;
-    width: 300px;
+    margin: 20px;
+    min-width: 300px;
+    max-width: 300px;
 }
 
 table {
