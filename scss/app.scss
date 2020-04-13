@@ -3,6 +3,7 @@
 @import 'reset.css';
 @import 'colors';
 @import 'typography';
+@import 'breakpoints';
 
 body {
     font-family: 'Roboto', sans-serif;
@@ -80,22 +81,19 @@ header {
         top: 0;
         width: 100%
     }
-
+    
     .sticky + main {
         padding-top: 146px;
     }
 }
 
 main {
-    min-height: 100vh;
+    padding-left: 16%;
+    padding-right: 16%;
     background-color: $grey-9;
     color: $primary-color-5;
+    min-height: 100vh;
     text-align: center;
-    padding-left: 100px;
-    padding-right: 100px;
-    // display: flex;
-    // flex-direction: column;
-    // align-content: space-around;
 
     img {
         padding-bottom: 25px;
@@ -106,6 +104,20 @@ main {
         justify-content: space-between;
         padding-top: 15px;
         padding-bottom: 5px;
+    }
+}
+
+@media (max-width: 1340px) {
+    main {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+}
+
+@media (max-width: 1124px) {
+    main {
+        padding-left: 15%;
+        padding-right: 15%;
     }
 }
 
@@ -231,6 +243,24 @@ form {
 .guest-info {
     text-align: left !important;
     line-height: 200%;
+}
+
+.guest-cards {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+}
+
+@media (max-width: 857px) {
+    .guest-cards {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+.card {
+    margin-bottom: 20px;
+    width: 300px;
 }
 
 table {

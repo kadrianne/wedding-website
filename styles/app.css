@@ -60,12 +60,12 @@ header {
   .sticky + main {
     padding-top: 146px; } }
 main {
-  min-height: 100vh;
+  padding-left: 16%;
+  padding-right: 16%;
   background-color: #f0f2f4;
   color: #538cc6;
-  text-align: center;
-  padding-left: 100px;
-  padding-right: 100px; }
+  min-height: 100vh;
+  text-align: center; }
   main img {
     padding-bottom: 25px; }
   main .guest-container {
@@ -74,6 +74,14 @@ main {
     padding-top: 15px;
     padding-bottom: 5px; }
 
+@media (max-width: 1340px) {
+  main {
+    padding-left: 10%;
+    padding-right: 10%; } }
+@media (max-width: 1124px) {
+  main {
+    padding-left: 15%;
+    padding-right: 15%; } }
 .button-container {
   display: flex;
   align-items: flex-end;
@@ -165,6 +173,19 @@ form .error-messages {
 .guest-info {
   text-align: left !important;
   line-height: 200%; }
+
+.guest-cards {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between; }
+
+@media (max-width: 857px) {
+  .guest-cards {
+    display: flex;
+    justify-content: center; } }
+.card {
+  margin-bottom: 20px;
+  width: 300px; }
 
 table thead {
   background-color: #b3cce6;
