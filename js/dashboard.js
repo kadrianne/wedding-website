@@ -129,23 +129,27 @@ function editGuestInfo(guestID){
 
     fetch(`${backendURL}/guests/${guestID}`)
         .then(response => response.json())
-        .then(prefillGuestInfo)
-
-    function prefillGuestInfo(guest){
-        const guestAge = {
-            'Adult 12+': 'adultOption',
-            'Child 3-12': 'childOption',
-            'Baby 0-3': 'babyOption'
-        }
-
-        first_name.value = guest.first_name
-        last_name.value = guest.last_name
-        email.value = guest.email
-        phone.value = guest.phone
-        preselectAgeFromDropdown(guestAge[guest.age])
-        // household.value = guest.household.family
-        // rsvp.value = guest.rsvp
+        .then(guest => {
+            const guestAge = {
+                'Adult 12+': 'adultOption',
+                'Child 3-12': 'childOption',
+                'Baby 0-3': 'babyOption'
+            }
+    
+            first_name.value = guest.first_name
+            last_name.value = guest.last_name
+            email.value = guest.email
+            phone.value = guest.phone
+            preselectAgeFromDropdown(guestAge[guest.age])
+            preselectHouseholdFromDropdown(guest.household_id)
+            // rsvp.value = guest.rsvp
+        })
     }
+    
+function preselectHouseholdFromDropdown(householdID){
+    let element = document.querySelector(`#edit-guest-form .household-option-${householdID}`)
+    console.log(element)
+    element.setAttribute("selected","")
 }
 
 function preselectAgeFromDropdown(elementID){
@@ -184,15 +188,7 @@ function addGuestEventListener(){
         const phone = guestFormData.get('phone')
         const household_id = guestFormData.get('household_id')
         const rsvp = guestFormData.get('rsvp')
-        const guest = {
-            first_name: first_name,
-            last_name: last_name,
-            age: age,
-            email: email,
-            phone: phone,
-            rsvp: rsvp,
-            household_id: household_id,
-        }
+        const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
 
         renderGuest(guest)
         postNewGuest(guest)
@@ -226,10 +222,8 @@ function addHouseholdEventListener() {
         const householdFormData = new FormData(addHouseholdForm)
         const family = householdFormData.get('family')
         const region = householdFormData.get('region')
-        const household = {
-            family: family,
-            region: region
-        }
+        const household = {family,region}
+
         renderHousehold(household)
         postNewHousehold(household)
         event.target.reset()
@@ -289,7 +283,7 @@ function addHouseholdsToDropdown(households){
             
             householdOption.textContent = `${household.family} - ${household.region}`
             householdOption.value = household.id
-            householdOption.id = `household-${household.id}`
+            householdOption.className = `household-option-${household.id}`
     
             dropdown.appendChild(householdOption)
         })
