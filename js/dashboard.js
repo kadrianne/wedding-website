@@ -129,17 +129,28 @@ function editGuestInfo(guestID){
 
     fetch(`${backendURL}/guests/${guestID}`)
         .then(response => response.json())
-        .then(guest => {
-            first_name.value = guest.first_name
-            last_name.value = guest.last_name
-            // age.value = guest.age
-            email.value = guest.email
-            // household.value = guest.household.family
-            phone.value = guest.phone
-            // rsvp.value = guest.rsvp
-        })
+        .then(prefillGuestInfo)
 
-    console.log(guestID)
+    function prefillGuestInfo(guest){
+        const guestAge = {
+            'Adult 12+': 'adultOption',
+            'Child 3-12': 'childOption',
+            'Baby 0-3': 'babyOption'
+        }
+
+        first_name.value = guest.first_name
+        last_name.value = guest.last_name
+        email.value = guest.email
+        phone.value = guest.phone
+        preselectAgeFromDropdown(guestAge[guest.age])
+        // household.value = guest.household.family
+        // rsvp.value = guest.rsvp
+    }
+}
+
+function preselectAgeFromDropdown(elementID){
+    let element = document.querySelector(`#${elementID}`)
+    element.setAttribute("selected","")
 }
 
 function deleteGuestInfo(guestID){
@@ -278,6 +289,7 @@ function addHouseholdsToDropdown(households){
             
             householdOption.textContent = `${household.family} - ${household.region}`
             householdOption.value = household.id
+            householdOption.id = `household-${household.id}`
     
             dropdown.appendChild(householdOption)
         })

@@ -97,7 +97,7 @@ main {
   main {
     padding-left: 20px;
     padding-right: 20px;
-    min-height: 75vh; }
+    min-height: 80vh; }
     main img {
       width: 100%; } }
 footer {
@@ -166,7 +166,7 @@ form .error-messages {
   background-color: white;
   padding: 30px 30px 30px 30px;
   display: inline-block;
-  width: 400px; }
+  max-width: 400px; }
 
 .guest-info {
   text-align: left !important;

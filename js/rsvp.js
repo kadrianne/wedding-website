@@ -62,13 +62,14 @@ function createGuestCard(guest){
     const email = document.createElement('p')
     const phone = document.createElement('p')
     const address = document.createElement('p')
-    const buttons = document.createElement('div')
+    const buttons = document.createElement('form')
     const yesButton = document.createElement('input')
     const yesButtonLabel = document.createElement('label')
     const noButton = document.createElement('input')
     const noButtonLabel = document.createElement('label')
 
     card.className = 'card'
+    card.setAttribute('guest-id', `${guest.id}`)
     name.className = 'card-header'
     name.textContent = `${guest.first_name} ${guest.last_name}`
     cardBody.className = 'card-body'
@@ -78,6 +79,7 @@ function createGuestCard(guest){
     email.textContent = `Email: ${guest.email}`
     phone.textContent = `Phone: ${guest.phone}`
     address.textContent = `Address: ${guest.address}`
+
     yesButton.type = 'radio'
     yesButton.id = 'yesButton'
     noButton.type = 'radio'
