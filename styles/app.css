@@ -139,7 +139,7 @@ h2 {
 
 h3 {
   font-family: 'Playfair Display';
-  font-weight: 600;
+  font-weight: 500;
   font-size: 24px;
   padding-bottom: 5px; }
 
@@ -227,6 +227,22 @@ form .error-messages {
   .card-footer input[type="radio"]:checked + label {
     background-color: #f2b0a6;
     color: #f0f2f4; }
+  .card-footer button {
+    display: inline-block;
+    margin: 10px 10px 5px 10px;
+    padding: 10px;
+    width: 100px;
+    border: 1px solid #ec9f93;
+    border-radius: .25rem;
+    background-color: white;
+    color: #ec9f93; }
+  .card-footer .active {
+    background-color: #ec9f93;
+    color: white; }
+  .card-footer a {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    cursor: pointer; }
 
 table {
   margin-bottom: 25px; }

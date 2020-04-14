@@ -54,7 +54,7 @@ function createGuestCard(guest){
     const card = document.createElement('div')
     const cardBody = document.createElement('div')
     const cardFooter = document.createElement('div')
-    const name = document.createElement('h4')
+    const name = document.createElement('h3')
     const info = document.createElement('p')
     const rsvpText = document.createElement('p')
     const rsvpButtons = document.createElement('p')
@@ -62,11 +62,9 @@ function createGuestCard(guest){
     const email = document.createElement('p')
     const phone = document.createElement('p')
     const address = document.createElement('p')
-    const buttons = document.createElement('form')
-    const yesButton = document.createElement('input')
-    const yesButtonLabel = document.createElement('label')
-    const noButton = document.createElement('input')
-    const noButtonLabel = document.createElement('label')
+    const yesButton = document.createElement('button')
+    const noButton = document.createElement('button')
+    const clearRSVP = document.createElement('a')
 
     card.className = 'card'
     card.setAttribute('guest-id', `${guest.id}`)
@@ -79,19 +77,41 @@ function createGuestCard(guest){
     email.textContent = `Email: ${guest.email}`
     phone.textContent = `Phone: ${guest.phone}`
     address.textContent = `Address: ${guest.address}`
+    yesButton.innerText = 'Yes'
+    noButton.innerText = 'No'
+    clearRSVP.innerHTML = 'Clear'
 
-    yesButton.type = 'radio'
-    yesButton.id = 'yesButton'
-    noButton.type = 'radio'
-    noButton.id = 'noButton'
-    yesButtonLabel.htmlFor = 'yesButton'
-    yesButtonLabel.textContent = 'Yes'
-    noButtonLabel.htmlFor = 'noButton'
-    noButtonLabel.textContent = 'No'
+    if (guest.rsvp == true) {
+        yesButton.classList.add('active')
+    } else if (guest.rsvp == false) {
+        noButton.classList.add('active')
+    }
+    
+    noButton.addEventListener('click', (event) => {
+        noButton.classList.add('active')
+        yesButton.classList.remove('active')
+        patchGuest(guest.id,false)
+    })
+
+    yesButton.addEventListener('click', (event) => {
+        yesButton.classList.add('active')
+        noButton.classList.remove('active')
+        patchGuest(guest.id,true)
+    })
+
+    clearRSVP.addEventListener('click', (event) => {
+        yesButton.classList.remove('active')
+        noButton.classList.remove('active')
+        patchGuest(guest.id,null)
+    })
 
     guestCards.append(card)
     card.append(name,cardBody,cardFooter)
     cardBody.append(age,email,phone,address)
-    cardFooter.append(rsvpText,buttons)
-    buttons.append(yesButton,yesButtonLabel,noButton,noButtonLabel)
+    cardFooter.append(rsvpText,yesButton,noButton,clearRSVP)
+}
+
+function patchGuest(guestID, rsvp){
+    console.log(guestID)
+    console.log(rsvp)
 }
