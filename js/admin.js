@@ -48,7 +48,7 @@ function authenticateUser(user){
 
 function checkAuthorization(response){
     if (response.admin) {
-        window.location.replace("/dashboard.html")
+        window.location.replace("/dashboard/guests.html")
     } else {
         errorMessages.textContent = response.message
         clearInputs()

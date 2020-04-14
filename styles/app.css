@@ -20,6 +20,13 @@ header {
     font-family: 'Playfair Display', serif;
     font-weight: 500;
     margin: auto; }
+  header .dash-heading {
+    color: #174d82;
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 500;
+    margin: auto; }
   header .tagline {
     color: #174d82;
     font-size: 20px;
@@ -67,8 +74,10 @@ main {
   color: #538cc6;
   min-height: 100vh;
   text-align: center; }
+  main a {
+    color: #2966a3; }
   main img {
-    padding-bottom: 25px; }
+    padding: 25px; }
   main .guest-container {
     display: flex;
     justify-content: space-between;
@@ -108,11 +117,14 @@ footer {
   padding-bottom: 25px;
   font-size: 14px; }
 
+b {
+  font-weight: 700;
+  font-size: 18px; }
+
 h1 {
   font-family: 'Playfair Display', serif;
   letter-spacing: 1px;
   padding-top: 25px;
-  padding-bottom: 25px;
   color: #2966a3;
   font-weight: 500;
   font-size: 30px; }
@@ -127,17 +139,17 @@ h2 {
   font-size: 24px; }
 
 h3 {
+  font-family: 'Playfair Display';
+  font-weight: 600;
+  font-size: 24px;
+  padding-bottom: 5px; }
+
+h4 {
   color: #4080bf;
   font-weight: 700;
   font-size: 20px;
   text-decoration: underline;
   padding-bottom: 10px; }
-
-h4 {
-  font-family: 'Playfair Display';
-  font-weight: 600;
-  font-size: 20px;
-  padding-bottom: 5px; }
 
 form p {
   padding-bottom: 15px;
@@ -218,7 +230,7 @@ form .error-messages {
     color: #f0f2f4; }
 
 table {
-  padding-bottom: 25px; }
+  margin-bottom: 25px; }
   table thead {
     background-color: #b3cce6;
     color: #0f3357; }

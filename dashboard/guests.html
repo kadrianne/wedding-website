@@ -8,14 +8,15 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>Kristine & Samuel's Wedding - Dashboard</title>
-        <link rel="stylesheet" href="/styles/app.css"/>
-        <link rel="stylesheet" href="/styles/foundation.css"/>
+        <link rel="stylesheet" href="../styles/app.css"/>
+        <link rel="stylesheet" href="../styles/foundation.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
-        <script src='js/dashboard.js' defer></script>
+        <script src='../js/guests.js' defer></script>
         <link rel='stylesheet' href='/fontawesome-free-5.13.0-web/css/all.css'>
     </head>
     <body>
         <header>
+            <script src='../js/dash-header.js'></script>
         </header>
         <main>
             <!-- Guest Section -->
@@ -25,7 +26,7 @@
                     <input type="text" id="filter-guests" placeholder="Filter..">
                 </section>
                 <section id='rsvp-count'>
-                    <h3>RSVP Count</h3>
+                    <h4>RSVP Count</h4>
                     <ul class="stats-list">
                     </ul>                      
                 </section>
@@ -35,7 +36,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-guest-modal-label">Add Guest</h4>
+                            <h3 class="modal-title" id="add-guest-modal-label">Add Guest</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -81,7 +82,7 @@
                                     <div class="col">
                                         <label for="rsvpField" class="col-form-label">RSVP:</label>
                                         <select class="form-control" id="rsvpField" name='rsvp'>
-                                            <option value='null'></option>
+                                            <option value=''></option>
                                             <option value='true'>Attending</option>
                                             <option value='false'>Not Attending</option>
                                         </select>
@@ -117,7 +118,7 @@
                 <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h4 class="modal-title" id="view-guest-name"></h4>
+                        <h3 class="modal-title" id="view-guest-name"></h3>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -132,7 +133,7 @@
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="add-guest-modal-label">Edit Guest</h4>
+                            <h3 class="modal-title" id="add-guest-modal-label">Edit Guest</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                             </button>
@@ -153,7 +154,7 @@
                                     <div class="col">
                                         <label for="editAgeField" class="col-form-label">Age:</label>
                                         <select class="form-control" id="editAgeField" name='age'>
-                                            <option value=''></option>
+                                            <option id='nullAgeOption' value=''></option>
                                             <option id='adultOption' value='Adult 12+'>Adult 12+</option>
                                             <option id='childOption' value='Child 3-12'>Child 3-12</option>
                                             <option id='babyOption' value='Baby 0-3'>Baby 0-3</option>
@@ -178,9 +179,9 @@
                                     <div class="col">
                                         <label for="editRsvpField" class="col-form-label">RSVP:</label>
                                         <select class="form-control" id="editRsvpField" name='rsvp'>
-                                            <option value='null'></option>
-                                            <option value='true'>Attending</option>
-                                            <option value='false'>Not Attending</option>
+                                            <option id='null-rsvp-option' value='null'></option>
+                                            <option id='attending-option' value='true'>Attending</option>
+                                            <option id='not-attending-option' value='false'>Not Attending</option>
                                         </select>
                                     </div>
                                 </div>
@@ -191,51 +192,9 @@
                     </div>
                 </div>
             </div>
-            <!-- Add Household Modal -->
-            <section class='button-container'>
-                <button id='add-household' class='btn btn-primary' data-toggle='modal' data-target="#add-household-modal">Add Household</button>
-            </section>
-            <div class="modal fade" id="add-household-modal" tabindex="-1" role="dialog" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="add-household-modal-label">Add Household</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            <form id='add-household-form'>
-                                <div class="form-group">
-                                    <label for="familyField" class="col-form-label">Family:</label>
-                                    <input type="text" class="form-control" id="familyField" name='family' placeholder="Enter family name">
-                                </div>
-                                <div class="form-group">
-                                    <label for="regionField" class="col-form-label">Region:</label>
-                                    <input class="form-control" id="regionField" name='region' placeholder="Enter household location"></input>
-                                </div>
-                                <p class='success-message'></p>
-                                <button type="submit" class="btn btn-primary">Submit</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Household Table -->
-            <table class="responsive-card-table unstriped" width=40%>
-                <thead>
-                  <tr>
-                    <th>Family Name</th>
-                    <th>Region</th>
-                    <th>Guests</th>
-                  </tr>
-                </thead>
-                <tbody id='household-list'>
-                </tbody>
-            </table>
         </main>
         <footer>
-            <script src="js/footer.js"></script>
+            <script src="../js/footer.js"></script>
         </footer>
     </body>
 </html>

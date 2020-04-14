@@ -27,6 +27,15 @@ header {
         font-weight: 500;
         margin: auto;
     }
+
+    .dash-heading {
+        color: $primary-color-2;
+        font-size: $font-xl;
+        letter-spacing: 1px;
+        font-family: 'Playfair Display', serif;
+        font-weight: 500;
+        margin: auto;
+    }
     
     .tagline {
         color: $primary-color-2;
@@ -96,8 +105,12 @@ main {
     min-height: 100vh;
     text-align: center;
 
+    a {
+        color: $primary-color-3;
+    }
+
     img {
-        padding-bottom: 25px;
+        padding: 25px;
     }
 
     .guest-container {
@@ -155,11 +168,16 @@ footer {
     font-size: 14px;
 }
 
+b {
+    font-weight: 700;
+    font-size: 18px;
+}
+
 h1 {
     font-family: 'Playfair Display', serif;
     letter-spacing: 1px;
     padding-top: 25px;
-    padding-bottom: 25px;
+    // padding-bottom: 25px;
     color: $primary-color-3;
     font-weight: 500;
     font-size: $font-xl;
@@ -176,18 +194,18 @@ h2 {
 }
 
 h3 {
+    font-family: 'Playfair Display';
+    font-weight: 600;
+    font-size: $font-large;
+    padding-bottom: 5px;
+}
+
+h4 {
     color: $primary-color-4;
     font-weight: 700;
     font-size: $font-baseline;
     text-decoration: underline;
     padding-bottom: 10px;
-}
-
-h4 {
-    font-family: 'Playfair Display';
-    font-weight: 600;
-    font-size: $font-baseline;
-    padding-bottom: 5px;
 }
 
 form {
@@ -304,6 +322,8 @@ form {
 
 
 table {
+    margin-bottom: 25px;
+
     thead {
         background-color: $primary-color-9;
         color: $primary-color-1;
@@ -312,7 +332,6 @@ table {
     tbody {
         color: $grey-3;
     }
-    padding-bottom: 25px;
 }
 
 .modal-header{

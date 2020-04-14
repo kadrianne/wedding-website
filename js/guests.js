@@ -1,5 +1,4 @@
 const guestList = document.querySelector('#guest-list')
-const householdList = document.querySelector('#household-list')
 const rows = guestList.getElementsByTagName("tr")
 const backendURL = 'http://localhost:3000'
 const guestRSVP = {
@@ -12,8 +11,8 @@ const guestRSVP = {
 fetchGuests()
 viewMoreInfoEventListener(guestList)
 addGuestEventListener()
+editGuestEventListener()
 fetchHouseholds()
-addHouseholdEventListener()
 
 function fetchGuests(){
     fetch(`${backendURL}/guests`)
@@ -108,11 +107,11 @@ function displayGuestInfo(guest) {
 
     viewGuestModal.innerHTML = ''
     name.textContent = `${guest.first_name} ${guest.last_name}`
-    household.textContent = `Household: ${guest.household.family}`
-    age.textContent = `Age: ${guest.age}`
-    email.innerHTML = `E-mail: <a href="mailto:${guest.email}">${guest.email}</a>`
-    phone.textContent = `Phone #: ${guest.phone}`
-    rsvp.innerHTML = `RSVP: ${guestRSVP[guest.rsvp]}`
+    household.innerHTML = `<b>Household:</b>  ${guest.household.family}`
+    age.innerHTML = `<b>Age:</b>  ${guest.age}`
+    email.innerHTML = `<b>E-mail:</b>  <a href="mailto:${guest.email}">${guest.email}</a>`
+    phone.innerHTML = `<b>Phone #:</b>  ${guest.phone}`
+    rsvp.innerHTML = `<b>RSVP:</b>  ${guestRSVP[guest.rsvp]}`
 
     viewGuestModal.append(household,age,email,phone,rsvp)
 }
@@ -130,31 +129,43 @@ function editGuestInfo(guestID){
     fetch(`${backendURL}/guests/${guestID}`)
         .then(response => response.json())
         .then(guest => {
-            const guestAge = {
+            const guestAgeOptions = {
+                '': 'nullAgeOption',
+                null: 'nullAgeOption',
                 'Adult 12+': 'adultOption',
                 'Child 3-12': 'childOption',
                 'Baby 0-3': 'babyOption'
+            }
+            
+            const guestRSVPOptions = {
+                null: 'null-rsvp-option',
+                true: 'attending-option',
+                false: 'not-attending-option'
             }
     
             first_name.value = guest.first_name
             last_name.value = guest.last_name
             email.value = guest.email
             phone.value = guest.phone
-            preselectAgeFromDropdown(guestAge[guest.age])
+            preselectAgeFromDropdown(guestAgeOptions[guest.age])
             preselectHouseholdFromDropdown(guest.household_id)
-            // rsvp.value = guest.rsvp
+            preselectRSVPFromDropdown(guestRSVPOptions[guest.rsvp])
         })
     }
+
+function preselectAgeFromDropdown(optionID){
+    const ageOption = document.querySelector(`#${optionID}`)
+    ageOption.setAttribute("selected","")
+}
     
 function preselectHouseholdFromDropdown(householdID){
-    let element = document.querySelector(`#edit-guest-form .household-option-${householdID}`)
-    console.log(element)
-    element.setAttribute("selected","")
+    const householdOption = document.querySelector(`#edit-guest-form .household-option-${householdID}`)
+    householdOption.setAttribute("selected","")
 }
 
-function preselectAgeFromDropdown(elementID){
-    let element = document.querySelector(`#${elementID}`)
-    element.setAttribute("selected","")
+function preselectRSVPFromDropdown(optionID){
+    const rsvpOption = document.querySelector(`#${optionID}`)
+    rsvpOption.setAttribute("selected","")
 }
 
 function deleteGuestInfo(guestID){
@@ -180,6 +191,7 @@ function addGuestEventListener(){
     const addGuestForm = document.querySelector('#add-guest-form')
     addGuestForm.addEventListener('submit', (event) => {
         event.preventDefault()
+
         const guestFormData = new FormData(addGuestForm)
         const first_name = guestFormData.get('first_name')
         const last_name = guestFormData.get('last_name')
@@ -190,7 +202,6 @@ function addGuestEventListener(){
         const rsvp = guestFormData.get('rsvp')
         const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
 
-        renderGuest(guest)
         postNewGuest(guest)
         event.target.reset()
     })
@@ -206,91 +217,65 @@ function postNewGuest(guest) {
         body: JSON.stringify({guest: guest})
     }).then(response => response.json())
         .then(result => {
-            handleResponse(result)
-            // assignID(result)
+            renderGuest(result.guest)
+            handleGuestResponse(result)
         })
-}
-
-// function assignID(result){
-//     console.log(result)
-// }
-
-function addHouseholdEventListener() {
-    const addHouseholdForm = document.querySelector('#add-household-form')
-    addHouseholdForm.addEventListener('submit', (event) => {
-        event.preventDefault()
-        const householdFormData = new FormData(addHouseholdForm)
-        const family = householdFormData.get('family')
-        const region = householdFormData.get('region')
-        const household = {family,region}
-
-        renderHousehold(household)
-        postNewHousehold(household)
-        event.target.reset()
-    })
-}
-
-
-function postNewHousehold(household) {
-    fetch(`${backendURL}/households`, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
-        body: JSON.stringify(household)
-    }).then(response => response.json())
-    .then(handleResponse)
 }
 
 function fetchHouseholds(){
     fetch(`${backendURL}/households`)
         .then(response => response.json())
-        .then(households => {
-            displayHouseholds(households)
-            addHouseholdsToDropdown(households)
-        })
+        .then(addHouseholdDropdowns)
 }
 
-function renderHousehold(household){
-    const row = document.createElement('tr')
-    const family = document.createElement('td')
-    const region = document.createElement('td')
-    const guestCount = document.createElement('td')
-    
-    family.textContent = household.family
-    region.textContent = household.region
-    if (!household.guests) {
-        guestCount.textContent = 0
-    } else {
-        guestCount.textContent = household.guests.length
-    }
-
-    row.append(family,region,guestCount)
-    householdList.append(row)
-}
-
-function displayHouseholds(households){
-    households.forEach(renderHousehold)
-}
-
-function addHouseholdsToDropdown(households){
+function addHouseholdDropdowns(households){
     const householdDropdowns = document.querySelectorAll('.household-dropdown')
 
     householdDropdowns.forEach(dropdown => {
-        households.forEach(household => {
-            const householdOption = document.createElement('option')
-            
-            householdOption.textContent = `${household.family} - ${household.region}`
-            householdOption.value = household.id
-            householdOption.className = `household-option-${household.id}`
-    
-            dropdown.appendChild(householdOption)
-        })
+        households.forEach(household => addHouseholdToDropdown(household,dropdown))
     })
 }
 
-function handleResponse(response){
-    const successMessage = document.querySelector('form > .success-message')
+function addHouseholdToDropdown(household,dropdown){
+    const householdOption = document.createElement('option')
+            
+    householdOption.textContent = `${household.family} - ${household.region}`
+    householdOption.value = household.id
+    householdOption.className = `household-option-${household.id}`
+
+    dropdown.appendChild(householdOption)
+}
+
+function handleGuestResponse(response){
+    const successMessage = document.querySelector('#add-guest-form .success-message')
     successMessage.textContent = response.message
+}
+
+function clearMessage(){
+    const successMessages = document.querySelectorAll('.success-message')
+    successMessages.forEach(message => message.textContent = '')
+}
+
+function editGuestEventListener(){
+    const editGuestForm = document.querySelector('#edit-guest-form')
+    editGuestForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const guestFormData = new FormData(editGuestForm)
+        const first_name = guestFormData.get('first_name')
+        const last_name = guestFormData.get('last_name')
+        const email = guestFormData.get('email')
+        const age = guestFormData.get('age')
+        const phone = guestFormData.get('phone')
+        const household_id = guestFormData.get('household_id')
+        const rsvp = guestFormData.get('rsvp')
+        const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
+
+        patchGuest(guest)
+        event.target.reset()
+    })
+}
+
+function patchGuest(guest){
+    console.log(guest)
 }
