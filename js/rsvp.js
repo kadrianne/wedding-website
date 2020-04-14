@@ -86,23 +86,23 @@ function createGuestCard(guest){
     } else if (guest.rsvp == false) {
         noButton.classList.add('active')
     }
-    
+
     noButton.addEventListener('click', (event) => {
         noButton.classList.add('active')
         yesButton.classList.remove('active')
-        patchGuest(guest.id,false)
+        patchGuest(guest,false)
     })
 
     yesButton.addEventListener('click', (event) => {
         yesButton.classList.add('active')
         noButton.classList.remove('active')
-        patchGuest(guest.id,true)
+        patchGuest(guest,true)
     })
 
     clearRSVP.addEventListener('click', (event) => {
         yesButton.classList.remove('active')
         noButton.classList.remove('active')
-        patchGuest(guest.id,null)
+        patchGuest(guest,null)
     })
 
     guestCards.append(card)
@@ -111,7 +111,18 @@ function createGuestCard(guest){
     cardFooter.append(rsvpText,yesButton,noButton,clearRSVP)
 }
 
-function patchGuest(guestID, rsvp){
-    console.log(guestID)
-    console.log(rsvp)
+function patchGuest(guest, rsvp){
+    fetch(`${backendURL}/guests/${guest.id}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            first_name: guest.first_name,
+            last_name: guest.last_name,
+            rsvp: rsvp,
+            household_id: guest.household_id
+        })
+    })
 }
