@@ -34,7 +34,6 @@ header {
         letter-spacing: 1px;
         font-family: 'Playfair Display', serif;
         font-weight: 500;
-        margin: auto;
     }
     
     .tagline {
@@ -46,7 +45,7 @@ header {
     .menu {
         font-size: $font-small;
         font-weight: 400;
-        padding: 20px 25px 10px 25px;
+        padding: 10px 25px;
         display: inline-block;
         
         li {
@@ -93,7 +92,7 @@ header {
     }
     
     .sticky + main {
-        padding-top: 146px;
+        padding-top: 131px;
     }
 }
 

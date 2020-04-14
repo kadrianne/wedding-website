@@ -11,8 +11,8 @@ const guestRSVP = {
 fetchGuests()
 viewMoreInfoEventListener(guestList)
 addGuestEventListener()
-editGuestEventListener()
 fetchHouseholds()
+clearMessageOnAddGuest()
 
 function fetchGuests(){
     fetch(`${backendURL}/guests`)
@@ -39,11 +39,8 @@ function renderGuest(guest){
     const editButton = document.createElement('td')
     const deleteButton = document.createElement('td')
     
-    if (!guest.id) {
-        // assignID()
-    } else {
-        row.dataset.guestid = guest.id
-    }
+    
+    row.dataset.guestid = guest.id
     firstName.textContent = guest.first_name
     lastName.textContent = guest.last_name
     age.textContent = guest.age
@@ -68,9 +65,9 @@ function countRSVPS(guests){
     const notAttendingCount = guests.filter(guest => guest.rsvp == false).length
     const noRSVPCount = guests.filter(guest => guest.rsvp == null || undefined).length
 
-    attending.innerHTML = `${guestRSVP.true} ${attendingCount}<span class="stats-list-label">Attending</span>`
-    notAttending.innerHTML = `${guestRSVP.false} ${notAttendingCount}<span class="stats-list-label">Not Attending</span>`
-    noRSVP.innerHTML = `${guestRSVP.null} ${noRSVPCount}<span class="stats-list-label">Not RSVP'd</span>`
+    attending.innerHTML = `${guestRSVP.true} <span id='attending-count'>${attendingCount}</span><span class="stats-list-label">Attending</span>`
+    notAttending.innerHTML = `${guestRSVP.false} <span id='not-attending-count'>${notAttendingCount}</span><span class="stats-list-label">Not Attending</span>`
+    noRSVP.innerHTML = `${guestRSVP.null} <span id='no-rsvp-count'>${noRSVPCount}</span><span class="stats-list-label">Not RSVP'd</span>`
 
     rsvpCount.append(attending,notAttending,noRSVP)
 }
@@ -85,7 +82,7 @@ function viewMoreInfoEventListener(guestList){
         } else if (buttonClass.match(/fa-edit/)) {
             editGuestInfo(rowDataSet.guestid)
         } else if (buttonClass.match(/fa-trash-alt/)) {
-            deleteGuestInfo(rowDataSet.guestid)
+            deleteGuestInfo(event.target,rowDataSet.guestid)
         }
     })
 }
@@ -151,6 +148,8 @@ function editGuestInfo(guestID){
             preselectHouseholdFromDropdown(guest.household_id)
             preselectRSVPFromDropdown(guestRSVPOptions[guest.rsvp])
         })
+
+        editGuestEventListener(guestID)
     }
 
 function preselectAgeFromDropdown(optionID){
@@ -168,7 +167,12 @@ function preselectRSVPFromDropdown(optionID){
     rsvpOption.setAttribute("selected","")
 }
 
-function deleteGuestInfo(guestID){
+function deleteGuestInfo(target,guestID){
+    target.parentNode.parentNode.remove()
+    deleteGuest(guestID)
+}
+
+function deleteGuest(guestID){
     fetch(`${backendURL}/guests/${guestID}`, {
         method: 'DELETE',
         headers: {
@@ -202,9 +206,23 @@ function addGuestEventListener(){
         const rsvp = guestFormData.get('rsvp')
         const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
 
+        addToRSVPCount(guest.rsvp)
         postNewGuest(guest)
         event.target.reset()
     })
+}
+
+function addToRSVPCount(rsvp){
+    const rsvpCounts = {
+        true: 'attending-count',
+        false: 'not-attending-count',
+        '': 'no-rsvp-count'
+    }
+    
+    const countElement = document.querySelector(`#${rsvpCounts[rsvp]}`)
+    let count = parseInt(countElement.textContent)
+    count += 1
+    countElement.textContent = count
 }
 
 function postNewGuest(guest) {
@@ -251,12 +269,16 @@ function handleGuestResponse(response){
     successMessage.textContent = response.message
 }
 
-function clearMessage(){
-    const successMessages = document.querySelectorAll('.success-message')
-    successMessages.forEach(message => message.textContent = '')
+function clearMessageOnAddGuest(){
+    const addGuestButton = document.querySelector('#add-guest')
+    
+    addGuestButton.addEventListener('click', (event) => {
+        const successMessages = document.querySelectorAll('.success-message')
+        successMessages.forEach(message => message.textContent = '')
+    })
 }
 
-function editGuestEventListener(){
+function editGuestEventListener(guestID){
     const editGuestForm = document.querySelector('#edit-guest-form')
     editGuestForm.addEventListener('submit', (event) => {
         event.preventDefault()
@@ -271,11 +293,18 @@ function editGuestEventListener(){
         const rsvp = guestFormData.get('rsvp')
         const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
 
-        patchGuest(guest)
-        event.target.reset()
+        patchGuest(guestID,guest)
     })
 }
 
-function patchGuest(guest){
-    console.log(guest)
+function patchGuest(guestID,guest){
+    fetch(`${backendURL}/guests/${guestID}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify(guest)
+    }).then(response => response.json())
+        .then(location.reload())
 }
