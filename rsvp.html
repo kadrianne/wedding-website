@@ -23,6 +23,54 @@
         <div class="guest-cards">
         </div>
     </main>
+    <!-- Edit Guest Modal -->
+    <div class="modal fade" id="edit-guest-modal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="edit-guest-modal-label">Edit Guest</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id='edit-guest-form'>
+                        <div class="row">
+                            <div class="col">
+                                <label for="editFirstNameField" class="col-form-label">First Name:</label>
+                                <input type="text" class="form-control" id="editFirstNameField" name='first_name'>
+                            </div>
+                            <div class="col">
+                                <label for="editLastNameField" class="col-form-label">Last Name:</label>
+                                <input class="form-control" id="editLastNameField" name='last_name'></input>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <label for="editAgeField" class="col-form-label">Age:</label>
+                                <select class="form-control" id="editAgeField" name='age'>
+                                    <option id='nullAgeOption' value=''></option>
+                                    <option id='adultOption' value='Adult 12+'>Adult 12+</option>
+                                    <option id='childOption' value='Child 3-12'>Child 3-12</option>
+                                    <option id='babyOption' value='Baby 0-3'>Baby 0-3</option>
+                                </select>
+                            </div>
+                            <div class="col">
+                                <label for="editPhoneField" class="col-form-label">Phone #:</label>
+                                <input class="form-control" id="editPhoneField" name='phone'></input>
+                            </div>
+                        </div>
+                        <div>
+                            <label for="editEmailField" class="col-form-label">Email:</label>
+                            <input class="form-control" id="editEmailField" name='email'></input>
+                        </div>
+                        <p class='success-message'></p>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <footer class='authorized'>
         <script src="js/footer.js"></script>
     </footer>

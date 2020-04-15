@@ -24,7 +24,8 @@ function fetchGuests(){
 }
 
 function displayGuests(guests){
-    guests.forEach(guest => {renderGuest(guest)})
+    const sortedGuests = guests.sort((a,b) => a.id - b.id)
+    sortedGuests.forEach(guest => {renderGuest(guest)})
 }
 
 function renderGuest(guest){
@@ -304,7 +305,7 @@ function patchGuest(guestID,guest){
             'Content-type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify(guest)
+        body: JSON.stringify({guest: guest})
     })
     location.reload()
 }

@@ -7,9 +7,9 @@
 
 body {
     font-family: 'Roboto', sans-serif;
-    color: $grey-9;
     display: flex;
     flex-direction: column;
+    color: $primary-color-5;
 }
 
 header {
@@ -17,7 +17,6 @@ header {
     padding-top: 20px;
     text-align: center;
     min-height: 7vh;
-    z-index: 1;
     
     .heading {
         color: $primary-color-2;
@@ -88,7 +87,8 @@ header {
     .sticky {
         position: fixed;
         top: 0;
-        width: 100%
+        width: 100%;
+        z-index: 2;
     }
     
     .sticky + main {
@@ -100,7 +100,6 @@ main {
     padding-left: 10%;
     padding-right: 10%;
     background-color: $grey-9;
-    color: $primary-color-5;
     min-height: 100vh;
     text-align: center;
 
@@ -348,7 +347,6 @@ form {
     }
 }
 
-
 table {
     margin-bottom: 25px;
 
@@ -362,7 +360,11 @@ table {
     }
 }
 
-.modal-header{
+.modal {
+    text-align: center;
+}
+
+.modal-header {
     padding-bottom: 5px;
 }
 

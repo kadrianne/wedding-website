@@ -3,16 +3,15 @@
 @import url(reset.css);
 body {
   font-family: 'Roboto', sans-serif;
-  color: #f0f2f4;
   display: flex;
-  flex-direction: column; }
+  flex-direction: column;
+  color: #538cc6; }
 
 header {
   background-color: #6699cc;
   padding-top: 20px;
   text-align: center;
-  min-height: 7vh;
-  z-index: 1; }
+  min-height: 7vh; }
   header .heading {
     color: #174d82;
     font-size: 40px;
@@ -62,7 +61,8 @@ header {
   .sticky {
     position: fixed;
     top: 0;
-    width: 100%; }
+    width: 100%;
+    z-index: 2; }
 
   .sticky + main {
     padding-top: 131px; } }
@@ -70,7 +70,6 @@ main {
   padding-left: 10%;
   padding-right: 10%;
   background-color: #f0f2f4;
-  color: #538cc6;
   min-height: 100vh;
   text-align: center; }
   main a {
@@ -256,6 +255,9 @@ table {
     color: #0f3357; }
   table tbody {
     color: #627384; }
+
+.modal {
+  text-align: center; }
 
 .modal-header {
   padding-bottom: 5px; }

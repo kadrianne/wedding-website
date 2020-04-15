@@ -4,7 +4,6 @@ const unauthorized = document.querySelector('.unauthorized')
 const guestCards = document.querySelector('.guest-cards')
 
 authenticate()
-cardEventListeners()
 
 function authenticate(){
     fetch(`${backendURL}/authenticate-login`, {
@@ -37,6 +36,7 @@ function getHousehold(login){
         .then(household => {
             displayFamilyName(household)
             displayGuests(household)
+            cardEventListeners(household.id)
         })
 }
 
@@ -46,7 +46,9 @@ function displayFamilyName(household){
 }
 
 function displayGuests(household){
-    household.guests.forEach(guest => {
+    const sortedGuests = household.guests.sort((a,b) => a.id - b.id)
+
+    sortedGuests.forEach(guest => {
         createGuestCard(guest)
     })
 }
@@ -61,61 +63,61 @@ function createGuestCard(guest){
     card.className = 'card'
     card.setAttribute('guest-id', `${guest.id}`)
     name.className = 'card-header'
-    name.textContent = `${guest.first_name} ${guest.last_name}`
-    edit.innerHTML = `<i class="far fa-edit"></i><a> Edit</a>`
+    name.innerHTML = `<span id='first-name-guest-${guest.id}'>${guest.first_name}</span> <span id='last-name-guest-${guest.id}'>${guest.last_name}</span>`
+    edit.innerHTML = `<i class="far fa-edit" data-toggle='modal' data-target="#edit-guest-modal"></i><a data-toggle='modal' data-target="#edit-guest-modal"> Edit</a>`
     edit.className = 'edit-text'
     cardBody.className = 'card-body'
     cardFooter.className = 'card-footer'
 
     guestCards.append(card)
     card.append(name,edit,cardBody,cardFooter)
-    guestInfo(guest)
-    rsvpFooter(guest)
-    
-    function guestInfo(guest){
-        const info = document.createElement('p')
-        const age = document.createElement('p')
-        const email = document.createElement('p')
-        const phone = document.createElement('p')
-        const address = document.createElement('p')
-        
-        age.innerHTML = `<b>Age:</b>  ${guest.age}`
-        email.innerHTML = `<b>Email:</b>  ${guest.email}`
-        phone.innerHTML = `<b>Phone:</b>  ${guest.phone}`
-        address.innerHTML = `<b>Address:</b>  ${guest.address}`
-        
-        cardBody.append(age,email,phone,address)
-    }
-    
-    function rsvpFooter(guest){
-        const rsvpText = document.createElement('p')
-        const rsvpButtons = document.createElement('p')
-        const yesButton = document.createElement('button')
-        const noButton = document.createElement('button')
-        const clearRSVP = document.createElement('a')
-        
-        rsvpText.textContent = `Will ${guest.first_name} be attending?`
-        yesButton.innerText = 'Yes'
-        yesButton.className = 'yes-button'
-        yesButton.id = `yes-button-${guest.id}`
-        noButton.innerText = 'No'
-        noButton.className = 'no-button'
-        noButton.id = `no-button-${guest.id}`
-        clearRSVP.innerHTML = 'Clear RSVP'
-        clearRSVP.className = 'clear-rsvp'
-        clearRSVP.id = `clear-button-${guest.id}`
-        
-        if (guest.rsvp == true) {
-            yesButton.classList.add('active')
-        } else if (guest.rsvp == false) {
-            noButton.classList.add('active')
-        }
-        
-        cardFooter.append(rsvpText,yesButton,noButton,clearRSVP)
-    }
+    displayGuestInfo(cardBody,guest)
+    rsvpFooter(cardFooter,guest)
 }
 
-function cardEventListeners(){
+function displayGuestInfo(cardBody,guest){
+    const info = document.createElement('div')
+    const age = document.createElement('p')
+    const email = document.createElement('p')
+    const phone = document.createElement('p')
+    const address = document.createElement('p')
+    
+    age.innerHTML = `<b>Age:</b>  <span id='age-guest-${guest.id}'>${guest.age}</span>`
+    email.innerHTML = `<b>Email:</b>  <span id='email-guest-${guest.id}'>${guest.email}</span>`
+    phone.innerHTML = `<b>Phone:</b>  <span id='phone-guest-${guest.id}'>${guest.phone}</span>`
+    address.innerHTML = `<b>Address:</b>  <span id='address-guest-${guest.id}'>${guest.address}</span>`
+    
+    cardBody.append(age,email,phone,address)
+}
+
+function rsvpFooter(cardFooter,guest){
+    const rsvpText = document.createElement('p')
+    const rsvpButtons = document.createElement('p')
+    const yesButton = document.createElement('button')
+    const noButton = document.createElement('button')
+    const clearRSVP = document.createElement('a')
+    
+    rsvpText.textContent = `Will ${guest.first_name} be attending?`
+    yesButton.innerText = 'Yes'
+    yesButton.className = 'yes-button'
+    yesButton.id = `yes-button-${guest.id}`
+    noButton.innerText = 'No'
+    noButton.className = 'no-button'
+    noButton.id = `no-button-${guest.id}`
+    clearRSVP.innerHTML = 'Clear RSVP'
+    clearRSVP.className = 'clear-rsvp'
+    clearRSVP.id = `clear-button-${guest.id}`
+    
+    if (guest.rsvp == true) {
+        yesButton.classList.add('active')
+    } else if (guest.rsvp == false) {
+        noButton.classList.add('active')
+    }
+    
+    cardFooter.append(rsvpText,yesButton,noButton,clearRSVP)
+}
+
+function cardEventListeners(householdID){
     guestCards.addEventListener('click', (event) => {
         const element = event.target
         const guestID = element.parentNode.parentNode.getAttribute('guest-id')
@@ -124,7 +126,8 @@ function cardEventListeners(){
         } else if (element.classList.contains('no-button')){
             noButtonHandler(guestID)
         } else if (element.parentNode.className == 'edit-text'){
-            editGuestHandler(guestID)
+            updateMessage('')
+            editGuestInfo(householdID,guestID)
         } else if (element.className == 'clear-rsvp'){
             clearRSVPHandler(guestID)
         }
@@ -137,7 +140,6 @@ function yesButtonHandler(guestID){
     
     yesButton.classList.add('active')
     noButton.classList.remove('active')
-    
     fetchGuest(guestID,true)
 }
 
@@ -161,17 +163,35 @@ function clearRSVPHandler(guestID){
     fetchGuest(guestID,null)
 }
 
-function editGuestHandler(){
-    console.log('edit')
-}
-
 function fetchGuest(guestID,rsvp){
     fetch(`${backendURL}/guests/${guestID}`)
         .then(response => response.json())
-        .then(guest => patchGuest(guest,rsvp))
+        .then(guest => patchRSVP(guest,rsvp))
 }
 
-function patchGuest(guest,rsvp){
+function patchGuest(guestID,guest){
+    fetch(`${backendURL}/guests/${guestID}`, {
+        method: 'PATCH',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({
+            guest: {
+                first_name: guest.first_name,
+                last_name: guest.last_name,
+                age: guest.age,
+                email: guest.email,
+                phone: guest.phone,
+                household_id: guest.household_id
+            }
+        })
+    }).then(response => response.json())
+        .then(response => updateMessage(response.message))
+    // location.reload()
+}
+
+function patchRSVP(guest,rsvp){
     fetch(`${backendURL}/guests/${guest.id}`, {
         method: 'PATCH',
         headers: {
@@ -179,11 +199,91 @@ function patchGuest(guest,rsvp){
             'Accept': 'application/json'
         },
         body: JSON.stringify({
-            first_name: guest.first_name,
-            last_name: guest.last_name,
-            rsvp: rsvp,
-            household_id: guest.household_id
+            guest: {
+                first_name: guest.first_name,
+                last_name: guest.last_name,
+                rsvp: rsvp,
+                household_id: guest.household_id
+            }
         })
-    }).then(response => response.json())
-    .then(console.log)
+    })
+}
+
+function renderGuestInfo(guestID,guest){
+    const first_name = document.querySelector(`#first-name-guest-${guestID}`)
+    const last_name = document.querySelector(`#last-name-guest-${guestID}`)
+    const age = document.querySelector(`#age-guest-${guestID}`)
+    const phone = document.querySelector(`#phone-guest-${guestID}`)
+    const email = document.querySelector(`#email-guest-${guestID}`)
+    
+    first_name.textContent = guest.first_name
+    last_name.textContent = guest.last_name
+    age.textContent = guest.age
+    phone.textContent = guest.phone
+    email.textContent = guest.email
+}
+
+function editGuestInfo(householdID,guestID){
+    const editGuestForm = document.querySelector('#edit-guest-form')
+    const first_name = document.querySelector('#editFirstNameField')
+    const last_name = document.querySelector('#editLastNameField')
+    const age = document.querySelector('#editAgeField option')
+    const email = document.querySelector('#editEmailField')
+    const phone = document.querySelector('#editPhoneField')
+
+    fetch(`${backendURL}/guests/${guestID}`)
+        .then(response => response.json())
+        .then(guest => {
+            const guestAgeOptions = {
+                '': 'nullAgeOption',
+                null: 'nullAgeOption',
+                'Adult 12+': 'adultOption',
+                'Child 3-12': 'childOption',
+                'Baby 0-3': 'babyOption'
+            }
+
+            first_name.value = guest.first_name
+            last_name.value = guest.last_name
+            email.value = guest.email
+            phone.value = guest.phone
+            preselectAgeFromDropdown(guestAgeOptions[guest.age])
+        })
+
+    editGuestEventListener(householdID,guestID)
+}
+
+function editGuestEventListener(householdID,guestID){
+    const editGuestForm = document.querySelector('#edit-guest-form')
+
+    editGuestForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+
+        const guestFormData = new FormData(editGuestForm)
+        const first_name = guestFormData.get('first_name')
+        const last_name = guestFormData.get('last_name')
+        const email = guestFormData.get('email')
+        const age = guestFormData.get('age')
+        const phone = guestFormData.get('phone')
+        const updatedGuest = {
+            first_name: first_name,
+            last_name: last_name,
+            age: age,
+            email: email,
+            phone: phone,
+            household_id: householdID
+        }
+
+        renderGuestInfo(guestID,updatedGuest)
+        patchGuest(guestID,updatedGuest)
+    }, {once: true})
+}
+
+function preselectAgeFromDropdown(optionID){
+    const ageOption = document.querySelector(`#${optionID}`)
+    ageOption.setAttribute("selected","")
+}
+
+function updateMessage(message){
+    const successMessage = document.querySelector('#edit-guest-form .success-message')
+    successMessage.textContent = message
 }
