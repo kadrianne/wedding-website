@@ -364,6 +364,17 @@ table {
     text-align: center;
 }
 
+.modal-dialog {
+    margin-top: 10%;
+}
+
+@media (max-width: $breakpoint-narrow) {
+    .modal-dialog {
+        margin-top: 30%;
+    }
+
+}
+
 .modal-header {
     padding-bottom: 5px;
 }

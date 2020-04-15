@@ -259,6 +259,12 @@ table {
 .modal {
   text-align: center; }
 
+.modal-dialog {
+  margin-top: 10%; }
+
+@media (max-width: 1024px) {
+  .modal-dialog {
+    margin-top: 30%; } }
 .modal-header {
   padding-bottom: 5px; }
 
