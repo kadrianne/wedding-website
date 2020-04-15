@@ -97,8 +97,8 @@ header {
 }
 
 main {
-    padding-left: 16%;
-    padding-right: 16%;
+    padding-left: 10%;
+    padding-right: 10%;
     background-color: $grey-9;
     color: $primary-color-5;
     min-height: 100vh;
@@ -122,8 +122,8 @@ main {
 
 @media (max-width: $breakpoint-baseline) {
     main {
-        padding-left: 15%;
-        padding-right: 15%;
+        padding-left: 10%;
+        padding-right: 10%;
     }
 }
 
@@ -169,7 +169,7 @@ footer {
 
 b {
     font-weight: 700;
-    font-size: 18px;
+    font-size: 17px;
 }
 
 h1 {
@@ -281,6 +281,18 @@ form {
     margin: 20px;
     min-width: 300px;
     max-width: 300px;
+
+    a {
+        font-family: 'Roboto', sans-serif;
+        font-size: $font-xs;
+        cursor: pointer;
+    }
+
+    .edit-text {
+        padding: 10px 20px;
+        text-align: right;
+        cursor: pointer
+    }
 }
 
 .card-header {
@@ -289,6 +301,7 @@ form {
 
 .card-body {
     text-align: left !important;
+    padding-top: 0px !important;
 }
 
 .card-footer {
@@ -332,12 +345,6 @@ form {
     .active {
         background-color: $secondary-color-2;
         color: white;
-    }
-
-    a {
-        font-family: 'Roboto', sans-serif;
-        font-size: $font-xxs;
-        cursor: pointer;
     }
 }
 

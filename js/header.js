@@ -6,10 +6,10 @@ const menuLinks = [
         title: "club paradise",
         url:"/club-paradise.html"
     },{
-        title: "rsvp",
+        title: "guest rsvp",
         url:"/rsvp.html"
     },{
-        title: "contact",
+        title: "contact us",
         url:"/contact.html"
     }
 ]

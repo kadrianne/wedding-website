@@ -305,6 +305,6 @@ function patchGuest(guestID,guest){
             'Accept': 'application/json'
         },
         body: JSON.stringify(guest)
-    }).then(response => response.json())
-        .then(location.reload())
+    })
+    location.reload()
 }
