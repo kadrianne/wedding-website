@@ -97,10 +97,13 @@ function createGuestCard(guest){
         rsvpText.textContent = `Will ${guest.first_name} be attending?`
         yesButton.innerText = 'Yes'
         yesButton.className = 'yes-button'
+        yesButton.id = `yes-button-${guest.id}`
         noButton.innerText = 'No'
         noButton.className = 'no-button'
+        noButton.id = `no-button-${guest.id}`
         clearRSVP.innerHTML = 'Clear RSVP'
         clearRSVP.className = 'clear-rsvp'
+        clearRSVP.id = `clear-button-${guest.id}`
         
         if (guest.rsvp == true) {
             yesButton.classList.add('active')
@@ -114,37 +117,58 @@ function createGuestCard(guest){
 
 function cardEventListeners(){
     guestCards.addEventListener('click', (event) => {
-        if (event.target.classList.contains('yes-button')){
-            console.log(event.target.parentNode)
-            yesButtonHandler()
-        } else if (event.target.classList.contains('no-button')){
-            noButtonHandler()
-        } else if (event.target.parentNode.className == 'edit-text'){
-            editGuestHandler()
-        } else if (event.target.className == 'clear-rsvp'){
-            clearRSVPHandler()
+        const element = event.target
+        const guestID = element.parentNode.parentNode.getAttribute('guest-id')
+        if (element.classList.contains('yes-button')){
+            yesButtonHandler(guestID)
+        } else if (element.classList.contains('no-button')){
+            noButtonHandler(guestID)
+        } else if (element.parentNode.className == 'edit-text'){
+            editGuestHandler(guestID)
+        } else if (element.className == 'clear-rsvp'){
+            clearRSVPHandler(guestID)
         }
     })
 }
 
+function yesButtonHandler(guestID){
+    const yesButton = document.querySelector(`#yes-button-${guestID}`)
+    const noButton = document.querySelector(`#no-button-${guestID}`)
+    
+    yesButton.classList.add('active')
+    noButton.classList.remove('active')
+    
+    fetchGuest(guestID,true)
+}
 
-function yesButtonHandler(){
-    // yesButton.classList.add('active')
-    // noButton.classList.remove('active')
-    // patchGuest(guest,true)
+function noButtonHandler(guestID){
+    const yesButton = document.querySelector(`#yes-button-${guestID}`)
+    const noButton = document.querySelector(`#no-button-${guestID}`)
+    
+    noButton.classList.add('active')
+    yesButton.classList.remove('active')
+    
+    fetchGuest(guestID,false)
 }
-function noButtonHandler(){
-    // noButton.classList.add('active')
-    // yesButton.classList.remove('active')
-    // patchGuest(guest,false)
+
+function clearRSVPHandler(guestID){
+    const yesButton = document.querySelector(`#yes-button-${guestID}`)
+    const noButton = document.querySelector(`#no-button-${guestID}`)
+    
+    yesButton.classList.remove('active')
+    noButton.classList.remove('active')
+
+    fetchGuest(guestID,null)
 }
-function clearRSVPHandler(){
-    // yesButton.classList.remove('active')
-    // noButton.classList.remove('active')
-    // patchGuest(guest,null)
-}
+
 function editGuestHandler(){
     console.log('edit')
+}
+
+function fetchGuest(guestID,rsvp){
+    fetch(`${backendURL}/guests/${guestID}`)
+        .then(response => response.json())
+        .then(guest => patchGuest(guest,rsvp))
 }
 
 function patchGuest(guest,rsvp){
@@ -160,5 +184,6 @@ function patchGuest(guest,rsvp){
             rsvp: rsvp,
             household_id: guest.household_id
         })
-    })
+    }).then(response => response.json())
+    .then(console.log)
 }
