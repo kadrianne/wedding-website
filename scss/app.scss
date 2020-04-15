@@ -7,6 +7,7 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     display: flex;
     flex-direction: column;
     color: $primary-color-5;
@@ -43,7 +44,6 @@ header {
     
     .menu {
         font-size: $font-small;
-        font-weight: 400;
         padding: 10px 25px;
         display: inline-block;
         
@@ -167,7 +167,7 @@ footer {
 }
 
 b {
-    font-weight: 700;
+    font-weight: 400;
     font-size: 17px;
 }
 
@@ -182,13 +182,11 @@ h1 {
 }
 
 h2 {
-    font-family: 'Playfair Display', serif;
-    letter-spacing: 1px;
-    padding-top: 25px;
-    padding-bottom: 25px;
+    padding-top: 5px;
+    padding-bottom: 10px;
     color: $primary-color-3;
-    font-weight: 500;
-    font-size: $font-large;
+    font-weight: 300;
+    font-size: $font-baseline;
 }
 
 h3 {
@@ -202,7 +200,6 @@ h4 {
     color: $primary-color-4;
     font-weight: 700;
     font-size: $font-baseline;
-    text-decoration: underline;
     padding-bottom: 10px;
 }
 
@@ -283,6 +280,7 @@ form {
 
     a {
         font-family: 'Roboto', sans-serif;
+        font-weight: 300;
         font-size: $font-xs;
         cursor: pointer;
     }
@@ -301,6 +299,7 @@ form {
 .card-body {
     text-align: left !important;
     padding-top: 0px !important;
+    font-weight: 300;
 }
 
 .card-footer {
@@ -353,6 +352,7 @@ table {
     thead {
         background-color: $primary-color-9;
         color: $primary-color-1;
+        font-weight: 400;
     }
 
     tbody {
@@ -419,7 +419,7 @@ table {
 // Animation code from https://css-tricks.com/add-page-transitions-css-smoothstate-js/
 .m-scene {
     .scene_element {
-        animation-duration: 1s;
+        animation-duration: 1.5s;
         transition-timing-function: ease-in;
         animation-fill-mode: both;
     }

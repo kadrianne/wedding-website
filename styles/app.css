@@ -3,6 +3,7 @@
 @import url(reset.css);
 body {
   font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   display: flex;
   flex-direction: column;
   color: #538cc6; }
@@ -31,7 +32,6 @@ header {
     font-weight: 300; }
   header .menu {
     font-size: 16px;
-    font-weight: 400;
     padding: 10px 25px;
     display: inline-block; }
     header .menu li {
@@ -116,7 +116,7 @@ footer {
   font-size: 14px; }
 
 b {
-  font-weight: 700;
+  font-weight: 400;
   font-size: 17px; }
 
 h1 {
@@ -128,13 +128,11 @@ h1 {
   font-size: 30px; }
 
 h2 {
-  font-family: 'Playfair Display', serif;
-  letter-spacing: 1px;
-  padding-top: 25px;
-  padding-bottom: 25px;
+  padding-top: 5px;
+  padding-bottom: 10px;
   color: #2966a3;
-  font-weight: 500;
-  font-size: 24px; }
+  font-weight: 300;
+  font-size: 20px; }
 
 h3 {
   font-family: 'Playfair Display';
@@ -146,7 +144,6 @@ h4 {
   color: #4080bf;
   font-weight: 700;
   font-size: 20px;
-  text-decoration: underline;
   padding-bottom: 10px; }
 
 form p {
@@ -201,6 +198,7 @@ form .error-messages {
   max-width: 300px; }
   .card a {
     font-family: 'Roboto', sans-serif;
+    font-weight: 300;
     font-size: 14px;
     cursor: pointer; }
   .card .edit-text {
@@ -213,7 +211,8 @@ form .error-messages {
 
 .card-body {
   text-align: left !important;
-  padding-top: 0px !important; }
+  padding-top: 0px !important;
+  font-weight: 300; }
 
 .card-footer {
   background-color: white;
@@ -252,7 +251,8 @@ table {
   margin-bottom: 25px; }
   table thead {
     background-color: #b3cce6;
-    color: #0f3357; }
+    color: #0f3357;
+    font-weight: 400; }
   table tbody {
     color: #627384; }
 
@@ -298,7 +298,7 @@ table {
   color: #339933; }
 
 .m-scene .scene_element {
-  animation-duration: 1s;
+  animation-duration: 1.5s;
   transition-timing-function: ease-in;
   animation-fill-mode: both; }
 .m-scene .scene_element--fadein {
