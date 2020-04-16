@@ -328,4 +328,8 @@ address {
 #view-guest-modal p {
   line-height: 20px; }
 
+.carousel {
+  width: 60%;
+  display: inline-block; }
+
 /*# sourceMappingURL=app.css.map */
