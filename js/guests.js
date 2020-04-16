@@ -123,6 +123,7 @@ function editGuestInfo(guestID){
     const email = document.querySelector('#editEmailField')
     const phone = document.querySelector('#editPhoneField')
     const rsvp = document.querySelector('#editRsvpField')
+    const address = document.querySelector('#editAddressField')
 
     fetch(`${backendURL}/guests/${guestID}`)
         .then(response => response.json())
@@ -146,7 +147,7 @@ function editGuestInfo(guestID){
             email.value = guest.email
             phone.value = guest.phone
             preselectAgeFromDropdown(guestAgeOptions[guest.age])
-            preselectHouseholdFromDropdown(guest.household_id)
+            preselectHouseholdFromDropdown(guest.household_id,guest.address_id)
             preselectRSVPFromDropdown(guestRSVPOptions[guest.rsvp])
         })
 
@@ -158,9 +159,10 @@ function preselectAgeFromDropdown(optionID){
     ageOption.setAttribute("selected","")
 }
     
-function preselectHouseholdFromDropdown(householdID){
+function preselectHouseholdFromDropdown(householdID,addressID){
     const householdOption = document.querySelector(`#edit-guest-form .household-option-${householdID}`)
     householdOption.setAttribute("selected","")
+    fetchAddresses(householdID,'editAddressField',addressID)
 }
 
 function preselectRSVPFromDropdown(optionID){
@@ -268,21 +270,19 @@ function addHouseholdToDropdown(household,dropdown){
     dropdown.appendChild(householdOption)
 }
 
-function fetchAddresses(householdID){
+function fetchAddresses(householdID, elementID = 'addressField', addressID = null){
     fetch(`${backendURL}/households/${householdID}`)
         .then(response => response.json())
-        .then(household => addAddressDropdowns(household.addresses))
+        .then(household => addAddressesDropdown(household.addresses,elementID,addressID))
 }
 
-function addAddressDropdowns(addresses){
-    const addressDropdowns = document.querySelectorAll('.address-dropdown')
+function addAddressesDropdown(addresses,elementID,addressID){
+    const addAddressDropdown = document.querySelector(`#${elementID}`)
 
-    addressDropdowns.forEach(dropdown => {
-        addresses.forEach(address => addAddressToDropdown(address,dropdown))
-    })
+    addresses.forEach(address => addAddressToDropdown(address,addAddressDropdown,addressID))
 }
 
-function addAddressToDropdown(address,dropdown){
+function addAddressToDropdown(address,dropdown, addressID){
     const addressOption = document.createElement('option')
     if (address.street2 == null) {
         addressOption.textContent = `${address.street1}, ${address.city}, ${address.state} ${address.zip} ${address.country}`
@@ -294,6 +294,17 @@ function addAddressToDropdown(address,dropdown){
     addressOption.className = `address-option-${address.id}`
 
     dropdown.appendChild(addressOption)
+
+    if (addressID !== null) {
+        preselectAddressFromDropdown(addressID)
+    }
+}
+
+function preselectAddressFromDropdown(addressID){
+    if (addressID) {
+        const addressOption = document.querySelector(`#edit-guest-form .address-option-${addressID}`)
+        addressOption.setAttribute("selected","")
+    }
 }
 
 function handleGuestResponse(response){

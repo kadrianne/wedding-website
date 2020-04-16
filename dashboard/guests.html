@@ -159,7 +159,7 @@
                                 <div class="row">
                                     <div class="col">
                                         <label for="editHouseholdField" class="col-form-label">Household:</label>
-                                        <select class="form-control household-dropdown" id="editHouseholdField" name='household_id'>
+                                        <select class="form-control household-dropdown" id="editHouseholdField" name='household_id' onChange="fetchAddresses(this.value);">
                                             <option></option>
                                         </select>
                                     </div>
