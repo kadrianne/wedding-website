@@ -118,19 +118,21 @@ function displayGuestInfo(guest) {
     addressLabel.className = 'label'
 
     const address = guest.address
-    if (address.street2 == null) {
-        addressInfo.innerHTML = `<address id='address-guest-${guest.id}'>
-            <p>${address.street1}</p>
-            <p>${address.city}, ${address.state} ${address.zip}</p>
-            <p>${address.country}</p>
-        </address>`
-    } else {
-        addressInfo.innerHTML = `<b>Address:</b>
-        <address id='address-guest-${guest.id}'>
-            <p>${address.street1}, ${address.street2}</p>
-            <p>${address.city}, ${address.state} ${address.zip}</p>
-            <p>${address.country}</p>
-        </address>`
+
+    if (address) {
+        if (address.street2 == null) {
+            addressInfo.innerHTML = `<address id='address-guest-${guest.id}'>
+                <p>${address.street1}</p>
+                <p>${address.city}, ${address.state} ${address.zip}</p>
+                <p>${address.country}</p>
+            </address>`
+        } else {
+            addressInfo.innerHTML = `<address id='address-guest-${guest.id}'>
+                <p>${address.street1}, ${address.street2}</p>
+                <p>${address.city}, ${address.state} ${address.zip}</p>
+                <p>${address.country}</p>
+            </address>`
+        }
     }
 
     addressContainer.append(addressLabel,addressInfo)
@@ -308,7 +310,7 @@ function addAddressesDropdown(addresses,elementID,addressID){
 
 function addAddressToDropdown(address,dropdown, addressID){
     const addressOption = document.createElement('option')
-    if (address.street2 == null) {
+    if (address.street2 == null || address.street2 == '') {
         addressOption.textContent = `${address.street1}, ${address.city}, ${address.state} ${address.zip} ${address.country}`
     } else {
         addressOption.textContent = `${address.street1}, ${address.street2}, ${address.city}, ${address.state} ${address.zip} ${address.country}`

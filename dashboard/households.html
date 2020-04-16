@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+        <link href="../favicon.ico" type="image/x-icon" rel="icon" />
         <meta charset="utf-8"/>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
@@ -22,6 +26,7 @@
             <!-- Add Household Modal -->
             <section class='button-container'>
                 <button id='add-household' class='btn btn-primary' data-toggle='modal' data-target="#add-household-modal">Add Household</button>
+                <button id='add-address' class='btn btn-primary' data-toggle='modal' data-target="#add-address-modal">Add Address</button>
             </section>
             <div class="modal fade" id="add-household-modal" tabindex="-1" role="dialog" aria-hidden="true">
                 <div class="modal-dialog" role="document">
@@ -41,6 +46,63 @@
                                 <div class="form-group">
                                     <label for="regionField" class="col-form-label">Region:</label>
                                     <input class="form-control" id="regionField" name='region' placeholder="Enter household location"></input>
+                                </div>
+                                <p class='success-message'></p>
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Add Address Modal -->
+            <div class="modal fade" id="add-address-modal" tabindex="-1" role="dialog" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="add-address-modal-label">Add Address</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <form id='add-address-form'>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="householdField" class="col-form-label">Household:</label>
+                                        <select class="form-control household-dropdown" id="householdField" name='household_id'>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="street1Field" class="col-form-label">Street 1:</label>
+                                    <input class="form-control" id="street1Field" name='street1'></input>
+                                </div>
+                                <div>
+                                    <label for="street2Field" class="col-form-label">Street 2:</label>
+                                    <input class="form-control" id="street2Field" name='street2'></input>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="cityField" class="col-form-label">City:</label>
+                                        <input class="form-control" id="cityField" name='city'></input>
+                                    </div>
+                                    <div class="col">
+                                        <label for="stateField" class="col-form-label">State:</label>
+                                        <select class="form-control" id="stateField" name='state'>
+                                            <option value=''></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col">
+                                        <label for="zipField" class="col-form-label">Zip Code:</label>
+                                        <input class="form-control" id="zipField" name='zip'></input>
+                                    </div>
+                                    <div class="col">
+                                        <label for="countryField" class="col-form-label">Country:</label>
+                                        <input class="form-control" id="countryField" name='country'>
+                                    </div>
                                 </div>
                                 <p class='success-message'></p>
                                 <button type="submit" class="btn btn-primary">Submit</button>

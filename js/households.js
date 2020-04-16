@@ -3,11 +3,15 @@ const backendURL = 'http://localhost:3000'
 
 fetchHouseholds()
 addHouseholdEventListener()
+addAddressEventListener()
 
 function fetchHouseholds(){
     fetch(`${backendURL}/households`)
         .then(response => response.json())
-        .then(displayHouseholds)
+        .then(households => {
+            displayHouseholds(households)
+            addHouseholdDropdown(households)
+        })
 }
 
 function displayHouseholds(households){
@@ -57,11 +61,80 @@ function postNewHousehold(household) {
         body: JSON.stringify(household)
     }).then(response => response.json())
     .then(results => {
-        handleHouseholdResponse(results)
+        handleResponse(results,'household')
     })
 }
 
-function handleHouseholdResponse(response){
-    const successMessage = document.querySelector('#add-household-form .success-message')
+function handleResponse(response,element){
+    const successMessage = document.querySelector(`#add-${element}-form .success-message`)
     successMessage.textContent = response.message
+}
+
+getStates()
+
+function getStates(){
+    fetch('https://gist.githubusercontent.com/mshafrir/2646763/raw/8b0dbb93521f5d6889502305335104218454c2bf/states_hash.json')
+        .then(response => response.json())
+        .then(results => addStatesToDropdown(Object.keys(results)))
+}
+
+function addStatesToDropdown(states){
+    const stateDropdown = document.querySelector('#stateField')
+    states.forEach(state => {
+        const stateOption = document.createElement('option')
+        stateOption.textContent = state
+        stateOption.value = state
+        stateDropdown.append(stateOption)
+    })
+}
+
+function addHouseholdDropdown(households){
+    const householdDropdown = document.querySelector('.household-dropdown')
+    households.forEach(household => {
+        addHouseholdToDropdown(household,householdDropdown)
+    })
+}
+
+function addHouseholdToDropdown(household,dropdown){
+    const householdOption = document.createElement('option')
+            
+    householdOption.textContent = `${household.family} - ${household.region}`
+    householdOption.value = household.id
+    householdOption.className = `household-option-${household.id}`
+
+    dropdown.appendChild(householdOption)
+}
+
+function addAddressEventListener(){
+    const addAddressForm = document.querySelector('#add-address-form')
+    addAddressForm.addEventListener('submit', (event) => {
+        event.preventDefault()
+        const addressFormData = new FormData(addAddressForm)
+        const household_id = addressFormData.get('household_id')
+        const street1 = addressFormData.get('street1')
+        const street2 = addressFormData.get('street2')
+        const city = addressFormData.get('city')
+        const state = addressFormData.get('state')
+        const zip = addressFormData.get('zip')
+        const country = addressFormData.get('country')
+        const address = {household_id,street1,street2,city,state,zip,country}
+        
+        // renderAddress(address)
+        postNewAddress(address)
+        event.target.reset()
+    })
+}
+
+function postNewAddress(address){
+    fetch(`${backendURL}/addresses`, {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(address)
+    }).then(response => response.json())
+        .then(results => {
+            console.log(results)
+            handleResponse(results,'address')})
 }
