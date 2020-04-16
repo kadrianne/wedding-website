@@ -82,7 +82,6 @@ function displayGuestInfo(cardBody,guest){
     const phone = document.createElement('p')
     const addressContainer = document.createElement('div')
     const addressLabel = document.createElement('b')
-    const addressInfo = document.createElement('p')
     
     age.innerHTML = `<b>Age:</b>  <span id='age-guest-${guest.id}'>${guest.age}</span>`
     email.innerHTML = `<b>Email:</b>  <span id='email-guest-${guest.id}'>${guest.email}</span>`
@@ -90,33 +89,36 @@ function displayGuestInfo(cardBody,guest){
     addressLabel.textContent = 'Address:'
     addressLabel.className = 'label'
     addressContainer.className = 'address-container'
+    addressContainer.id = `address-guest-${guest.id}`
 
     addressContainer.append(addressLabel)
-    displayAddress(addressContainer,addressInfo,guest.address_id,guest.id)
+    displayAddress(addressContainer,guest.address_id,guest.id)
     cardBody.append(age,email,phone,addressContainer)
 }
 
-function displayAddress(addressContainer,addressInfo,addressID,guestID){
-    fetch(`${backendURL}/addresses/${addressID}`)
-        .then(response => response.json())
-        .then(address => {
-            if (address.street2 == null) {
-                addressInfo.innerHTML = `<address id='address-guest-${guestID}'>
-                    <p>${address.street1}</p>
-                    <p>${address.city}, ${address.state} ${address.zip}</p>
-                    <p>${address.country}</p>
-                </address>`
-            } else {
-                addressInfo.innerHTML = `<b>Address:</b>
-                <address id='address-guest-${guestID}'>
-                    <p>${address.street1}, ${address.street2}</p>
-                    <p>${address.city}, ${address.state} ${address.zip}</p>
-                    <p>${address.country}</p>
-                </address>`
-            }
+function displayAddress(addressContainer,addressID,guestID){
+    const addressInfo = document.createElement('address')
 
-            addressContainer.append(addressInfo)
-        })
+    if (addressID) {
+        fetch(`${backendURL}/addresses/${addressID}`)
+        .then(response => response.json())
+        .then(address => renderAddress(addressContainer,addressInfo,address,guestID))
+    } else {
+        addressInfo.textContent = ''
+    }
+}
+
+function renderAddress(addressContainer,addressInfo,address,guestID){
+    if (address.street2 == null) {
+        addressInfo.innerHTML = `<p>${address.street1}</p>
+            <p>${address.city}, ${address.state} ${address.zip}</p>
+            <p>${address.country}</p>`
+    } else {
+        addressInfo.innerHTML = `<p>${address.street1}, ${address.street2}</p>
+            <p>${address.city}, ${address.state} ${address.zip}</p>
+            <p>${address.country}</p>`
+    }
+    addressContainer.append(addressInfo)
 }
 
 function rsvpFooter(cardFooter,guest){
@@ -205,16 +207,7 @@ function patchGuest(guestID,guest){
             'Content-Type': 'application/json',
             'Accept': 'application/json'
         },
-        body: JSON.stringify({
-            guest: {
-                first_name: guest.first_name,
-                last_name: guest.last_name,
-                age: guest.age,
-                email: guest.email,
-                phone: guest.phone,
-                household_id: guest.household_id
-            }
-        })
+        body: JSON.stringify(guest)
     }).then(response => response.json())
         .then(response => updateMessage(response.message))
     // location.reload()
@@ -244,12 +237,14 @@ function renderGuestInfo(guestID,guest){
     const age = document.querySelector(`#age-guest-${guestID}`)
     const phone = document.querySelector(`#phone-guest-${guestID}`)
     const email = document.querySelector(`#email-guest-${guestID}`)
+    const addressContainer = document.querySelector(`#address-guest-${guestID}`)
     
     first_name.textContent = guest.first_name
     last_name.textContent = guest.last_name
     age.textContent = guest.age
     phone.textContent = guest.phone
     email.textContent = guest.email
+    displayAddress(addressContainer,guest.address_id,guestID)
 }
 
 function editGuestInfo(householdID,guestID,addresses){
@@ -296,13 +291,15 @@ function editGuestEventListener(householdID,guestID){
         const email = guestFormData.get('email')
         const age = guestFormData.get('age')
         const phone = guestFormData.get('phone')
+        const address_id = guestFormData.get('address_id')
         const updatedGuest = {
             first_name: first_name,
             last_name: last_name,
             age: age,
             email: email,
             phone: phone,
-            household_id: householdID
+            household_id: householdID,
+            address_id: address_id
         }
 
         renderGuestInfo(guestID,updatedGuest)
@@ -328,7 +325,7 @@ function addAddressesDropdown(addresses,addressDropdown,addressID){
 
 function addAddressToDropdown(address,dropdown,addressID){
     const addressOption = document.createElement('option')
-    if (address.street2 == null) {
+    if (address.street2 == null || address.street2 == '') {
         addressOption.textContent = `${address.street1}, ${address.city}, ${address.state} ${address.zip} ${address.country}`
     } else {
         addressOption.textContent = `${address.street1}, ${address.street2}, ${address.city}, ${address.state} ${address.zip} ${address.country}`
