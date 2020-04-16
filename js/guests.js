@@ -205,7 +205,8 @@ function addGuestEventListener(){
         const phone = guestFormData.get('phone')
         const household_id = guestFormData.get('household_id')
         const rsvp = guestFormData.get('rsvp')
-        const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
+        const address_id = guestFormData.get('address_id')
+        const guest = {first_name,last_name,age,email,phone,rsvp,household_id,address_id}
 
         addToRSVPCount(guest.rsvp)
         postNewGuest(guest)
@@ -251,7 +252,9 @@ function addHouseholdDropdowns(households){
     const householdDropdowns = document.querySelectorAll('.household-dropdown')
 
     householdDropdowns.forEach(dropdown => {
-        households.forEach(household => addHouseholdToDropdown(household,dropdown))
+        households.forEach(household => {
+            addHouseholdToDropdown(household,dropdown)
+        })
     })
 }
 
@@ -263,6 +266,34 @@ function addHouseholdToDropdown(household,dropdown){
     householdOption.className = `household-option-${household.id}`
 
     dropdown.appendChild(householdOption)
+}
+
+function fetchAddresses(householdID){
+    fetch(`${backendURL}/households/${householdID}`)
+        .then(response => response.json())
+        .then(household => addAddressDropdowns(household.addresses))
+}
+
+function addAddressDropdowns(addresses){
+    const addressDropdowns = document.querySelectorAll('.address-dropdown')
+
+    addressDropdowns.forEach(dropdown => {
+        addresses.forEach(address => addAddressToDropdown(address,dropdown))
+    })
+}
+
+function addAddressToDropdown(address,dropdown){
+    const addressOption = document.createElement('option')
+    if (address.street2 == null) {
+        addressOption.textContent = `${address.street1}, ${address.city}, ${address.state} ${address.zip} ${address.country}`
+    } else {
+        addressOption.textContent = `${address.street1}, ${address.street2}, ${address.city}, ${address.state} ${address.zip} ${address.country}`
+    }
+
+    addressOption.value = address.id
+    addressOption.className = `address-option-${address.id}`
+
+    dropdown.appendChild(addressOption)
 }
 
 function handleGuestResponse(response){

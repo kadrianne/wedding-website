@@ -55,6 +55,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
+                                        <label for="householdField" class="col-form-label">Household:</label>
+                                        <select class="form-control household-dropdown" id="householdField" name='household_id' onChange="fetchAddresses(this.value);">
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
                                         <label for="ageField" class="col-form-label">Age:</label>
                                         <select class="form-control" id="ageField" name='age'>
                                             <option value=''></option>
@@ -63,16 +69,16 @@
                                             <option value='Baby 0-3'>Baby 0-3</option>
                                         </select>
                                     </div>
-                                    <div class="col">
-                                        <label for="householdField" class="col-form-label">Household:</label>
-                                        <select class="form-control household-dropdown" id="householdField" name='household_id'>
-                                            <option></option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div>
                                     <label for="emailField" class="col-form-label">Email:</label>
                                     <input class="form-control" id="emailField" name='email'></input>
+                                </div>
+                                <div>
+                                    <label for="addressField" class="col-form-label">Address:</label>
+                                    <select class="form-control address-dropdown" id="addressField" name='address_id'>
+                                        <option></option>
+                                    </select>
                                 </div>
                                 <div class="row">
                                     <div class="col">
@@ -152,6 +158,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="col">
+                                        <label for="editHouseholdField" class="col-form-label">Household:</label>
+                                        <select class="form-control household-dropdown" id="editHouseholdField" name='household_id'>
+                                            <option></option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
                                         <label for="editAgeField" class="col-form-label">Age:</label>
                                         <select class="form-control" id="editAgeField" name='age'>
                                             <option id='nullAgeOption' value=''></option>
@@ -160,16 +172,16 @@
                                             <option id='babyOption' value='Baby 0-3'>Baby 0-3</option>
                                         </select>
                                     </div>
-                                    <div class="col">
-                                        <label for="editHouseholdField" class="col-form-label">Household:</label>
-                                        <select class="form-control household-dropdown" id="editHouseholdField" name='household_id'>
-                                            <option></option>
-                                        </select>
-                                    </div>
                                 </div>
                                 <div>
                                     <label for="editEmailField" class="col-form-label">Email:</label>
                                     <input class="form-control" id="editEmailField" name='email'></input>
+                                </div>
+                                <div>
+                                    <label for="editAddressField" class="col-form-label">Address:</label>
+                                    <select class="form-control address-dropdown" id="editAddressField" name='address_id'>
+                                        <option></option>
+                                    </select>
                                 </div>
                                 <div class="row">
                                     <div class="col">
