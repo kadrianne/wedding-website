@@ -445,3 +445,16 @@ table {
     font-weight: 700;
     display: none
 }
+
+.address-container {
+    display: flex
+}
+
+address {
+    vertical-align: text-bottom;
+    line-height: 110%;
+}
+
+.label {
+    padding-right: 3px
+}

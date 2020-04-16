@@ -80,14 +80,43 @@ function displayGuestInfo(cardBody,guest){
     const age = document.createElement('p')
     const email = document.createElement('p')
     const phone = document.createElement('p')
-    const address = document.createElement('p')
+    const addressContainer = document.createElement('div')
+    const addressLabel = document.createElement('b')
+    const addressElement = document.createElement('p')
     
     age.innerHTML = `<b>Age:</b>  <span id='age-guest-${guest.id}'>${guest.age}</span>`
     email.innerHTML = `<b>Email:</b>  <span id='email-guest-${guest.id}'>${guest.email}</span>`
     phone.innerHTML = `<b>Phone:</b>  <span id='phone-guest-${guest.id}'>${guest.phone}</span>`
-    address.innerHTML = `<b>Address:</b>  <span id='address-guest-${guest.id}'>${guest.address}</span>`
-    
-    cardBody.append(age,email,phone,address)
+    addressLabel.textContent = 'Address:'
+    addressLabel.className = 'label'
+    addressContainer.className = 'address-container'
+
+    addressContainer.append(addressLabel)
+    displayAddress(addressContainer,addressElement,guest.address_id,guest.id)
+    cardBody.append(age,email,phone,addressContainer)
+}
+
+function displayAddress(addressContainer,addressElement,addressID,guestID){
+    fetch(`${backendURL}/addresses/${addressID}`)
+        .then(response => response.json())
+        .then(address => {
+            if (address.street2 == null) {
+                addressElement.innerHTML = `<address id='address-guest-${guestID}'>
+                    <p>${address.street1}</p>
+                    <p>${address.city}, ${address.state} ${address.zip}</p>
+                    <p>${address.country}</p>
+                </address>`
+            } else {
+                addressElement.innerHTML = `<b>Address:</b>
+                <address id='address-guest-${guestID}'>
+                    <p>${address.street1}, ${address.street2}</p>
+                    <p>${address.city}, ${address.state} ${address.zip}</p>
+                    <p>${address.country}</p>
+                </address>`
+            }
+
+            addressContainer.append(addressElement)
+        })
 }
 
 function rsvpFooter(cardFooter,guest){
