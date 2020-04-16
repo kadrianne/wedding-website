@@ -75,7 +75,8 @@ main {
   main a {
     color: #2966a3; }
   main img {
-    padding: 25px; }
+    margin: 25px;
+    border: 10px solid #ffd3cc; }
   main .guest-container {
     display: flex;
     justify-content: space-between;
@@ -330,6 +331,12 @@ address {
 
 .carousel {
   width: 60%;
-  display: inline-block; }
+  display: inline-block;
+  border: 10px solid #ffd3cc;
+  margin: 25px; }
+  .carousel img {
+    border: none;
+    padding: 0px;
+    margin: 0px; }
 
 /*# sourceMappingURL=app.css.map */

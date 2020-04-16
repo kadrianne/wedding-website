@@ -108,7 +108,9 @@ main {
     }
 
     img {
-        padding: 25px;
+        margin: 25px;
+        border: 10px solid $secondary-color-4;
+
     }
 
     .guest-container {
@@ -468,5 +470,12 @@ address {
 .carousel {
     width: 60%;
     display: inline-block;
+    border: 10px solid $secondary-color-4;
+    margin: 25px;
 
+    img {
+        border: none;
+        padding: 0px;
+        margin: 0px
+    }
 }
