@@ -82,7 +82,7 @@ function displayGuestInfo(cardBody,guest){
     const phone = document.createElement('p')
     const addressContainer = document.createElement('div')
     const addressLabel = document.createElement('b')
-    const addressElement = document.createElement('p')
+    const addressInfo = document.createElement('p')
     
     age.innerHTML = `<b>Age:</b>  <span id='age-guest-${guest.id}'>${guest.age}</span>`
     email.innerHTML = `<b>Email:</b>  <span id='email-guest-${guest.id}'>${guest.email}</span>`
@@ -92,22 +92,22 @@ function displayGuestInfo(cardBody,guest){
     addressContainer.className = 'address-container'
 
     addressContainer.append(addressLabel)
-    displayAddress(addressContainer,addressElement,guest.address_id,guest.id)
+    displayAddress(addressContainer,addressInfo,guest.address_id,guest.id)
     cardBody.append(age,email,phone,addressContainer)
 }
 
-function displayAddress(addressContainer,addressElement,addressID,guestID){
+function displayAddress(addressContainer,addressInfo,addressID,guestID){
     fetch(`${backendURL}/addresses/${addressID}`)
         .then(response => response.json())
         .then(address => {
             if (address.street2 == null) {
-                addressElement.innerHTML = `<address id='address-guest-${guestID}'>
+                addressInfo.innerHTML = `<address id='address-guest-${guestID}'>
                     <p>${address.street1}</p>
                     <p>${address.city}, ${address.state} ${address.zip}</p>
                     <p>${address.country}</p>
                 </address>`
             } else {
-                addressElement.innerHTML = `<b>Address:</b>
+                addressInfo.innerHTML = `<b>Address:</b>
                 <address id='address-guest-${guestID}'>
                     <p>${address.street1}, ${address.street2}</p>
                     <p>${address.city}, ${address.state} ${address.zip}</p>
@@ -115,7 +115,7 @@ function displayAddress(addressContainer,addressElement,addressID,guestID){
                 </address>`
             }
 
-            addressContainer.append(addressElement)
+            addressContainer.append(addressInfo)
         })
 }
 

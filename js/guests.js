@@ -9,7 +9,7 @@ const guestRSVP = {
 }
 
 fetchGuests()
-viewMoreInfoEventListener(guestList)
+iconEventListeners(guestList)
 addGuestEventListener()
 fetchHouseholds()
 clearMessageOnAddGuest()
@@ -73,7 +73,7 @@ function countRSVPS(guests){
     rsvpCount.append(attending,notAttending,noRSVP)
 }
 
-function viewMoreInfoEventListener(guestList){
+function iconEventListeners(guestList){
     guestList.addEventListener('click', (event) => {
         const buttonClass = event.target.className
         const rowDataSet = event.target.parentNode.parentNode.dataset
@@ -102,6 +102,9 @@ function displayGuestInfo(guest) {
     const email = document.createElement('p')
     const phone = document.createElement('p')
     const rsvp = document.createElement('p')
+    const addressContainer = document.createElement('div')
+    const addressLabel = document.createElement('p')
+    const addressInfo = document.createElement('address')
 
     viewGuestModal.innerHTML = ''
     name.textContent = `${guest.first_name} ${guest.last_name}`
@@ -110,8 +113,28 @@ function displayGuestInfo(guest) {
     email.innerHTML = `<b>E-mail:</b>  <a href="mailto:${guest.email}">${guest.email}</a>`
     phone.innerHTML = `<b>Phone #:</b>  ${guest.phone}`
     rsvp.innerHTML = `<b>RSVP:</b>  ${guestRSVP[guest.rsvp]}`
+    addressContainer.className = 'address-container'
+    addressLabel.innerHTML = `<b>Address:</b>`
+    addressLabel.className = 'label'
 
-    viewGuestModal.append(household,age,email,phone,rsvp)
+    const address = guest.address
+    if (address.street2 == null) {
+        addressInfo.innerHTML = `<address id='address-guest-${guest.id}'>
+            <p>${address.street1}</p>
+            <p>${address.city}, ${address.state} ${address.zip}</p>
+            <p>${address.country}</p>
+        </address>`
+    } else {
+        addressInfo.innerHTML = `<b>Address:</b>
+        <address id='address-guest-${guest.id}'>
+            <p>${address.street1}, ${address.street2}</p>
+            <p>${address.city}, ${address.state} ${address.zip}</p>
+            <p>${address.country}</p>
+        </address>`
+    }
+
+    addressContainer.append(addressLabel,addressInfo)
+    viewGuestModal.append(household,age,email,phone,rsvp,addressContainer)
 }
 
 function editGuestInfo(guestID){

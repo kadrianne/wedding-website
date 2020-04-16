@@ -325,4 +325,7 @@ address {
 .label {
   padding-right: 3px; }
 
+#view-guest-modal p {
+  line-height: 20px; }
+
 /*# sourceMappingURL=app.css.map */
