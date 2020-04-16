@@ -277,9 +277,10 @@ function fetchAddresses(householdID, elementID = 'addressField', addressID = nul
 }
 
 function addAddressesDropdown(addresses,elementID,addressID){
-    const addAddressDropdown = document.querySelector(`#${elementID}`)
+    const addressDropdown = document.querySelector(`#${elementID}`)
+    addressDropdown.innerHTML = '<option></option>'
 
-    addresses.forEach(address => addAddressToDropdown(address,addAddressDropdown,addressID))
+    addresses.forEach(address => addAddressToDropdown(address,addressDropdown,addressID))
 }
 
 function addAddressToDropdown(address,dropdown, addressID){
@@ -334,10 +335,11 @@ function editGuestEventListener(guestID){
         const phone = guestFormData.get('phone')
         const household_id = guestFormData.get('household_id')
         const rsvp = guestFormData.get('rsvp')
-        const guest = {first_name,last_name,age,email,phone,rsvp,household_id}
+        const address_id = guestFormData.get('address_id')
+        const guest = {first_name,last_name,age,email,phone,rsvp,household_id,address_id}
 
         patchGuest(guestID,guest)
-    })
+    }, {once: true})
 }
 
 function patchGuest(guestID,guest){
