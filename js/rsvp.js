@@ -82,6 +82,7 @@ function displayGuestInfo(cardBody,guest){
     const phone = document.createElement('p')
     const addressContainer = document.createElement('div')
     const addressLabel = document.createElement('b')
+    const addressInfo = document.createElement('address')
     
     age.innerHTML = `<b>Age:</b>  <span id='age-guest-${guest.id}'>${guest.age}</span>`
     email.innerHTML = `<b>Email:</b>  <span id='email-guest-${guest.id}'>${guest.email}</span>`
@@ -91,13 +92,13 @@ function displayGuestInfo(cardBody,guest){
     addressContainer.className = 'address-container'
     addressContainer.id = `address-guest-${guest.id}`
 
-    addressContainer.append(addressLabel)
-    displayAddress(addressContainer,guest.address_id,guest.id)
+    addressContainer.append(addressLabel,addressInfo)
     cardBody.append(age,email,phone,addressContainer)
+    displayAddress(addressContainer,guest.address_id,guest.id)
 }
 
 function displayAddress(addressContainer,addressID,guestID){
-    const addressInfo = document.createElement('address')
+    const addressInfo = document.querySelector(`#address-guest-${guestID} address`)
 
     if (addressID) {
         fetch(`${backendURL}/addresses/${addressID}`)
@@ -319,8 +320,12 @@ function updateMessage(message){
 
 function addAddressesDropdown(addresses,addressDropdown,addressID){
     addressDropdown.innerHTML = '<option></option>'
-
+    
     addresses.forEach(address => addAddressToDropdown(address,addressDropdown,addressID))
+
+    if (addressID !== null) {
+        preselectAddressFromDropdown(addressID)
+    }
 }
 
 function addAddressToDropdown(address,dropdown,addressID){
@@ -335,10 +340,6 @@ function addAddressToDropdown(address,dropdown,addressID){
     addressOption.className = `address-option-${address.id}`
 
     dropdown.appendChild(addressOption)
-
-    if (addressID !== null) {
-        preselectAddressFromDropdown(addressID)
-    }
 }
 
 function preselectAddressFromDropdown(addressID){
