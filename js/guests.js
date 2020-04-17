@@ -310,7 +310,6 @@ function addAddressesDropdown(addresses,elementID,addressID){
     if (addressID !== null) {
         preselectAddressFromDropdown(addressID)
     }
-
 }
 
 function addAddressToDropdown(address,dropdown, addressID){
