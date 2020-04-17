@@ -306,6 +306,11 @@ function addAddressesDropdown(addresses,elementID,addressID){
     addressDropdown.innerHTML = '<option></option>'
 
     addresses.forEach(address => addAddressToDropdown(address,addressDropdown,addressID))
+    
+    if (addressID !== null) {
+        preselectAddressFromDropdown(addressID)
+    }
+
 }
 
 function addAddressToDropdown(address,dropdown, addressID){
@@ -320,10 +325,6 @@ function addAddressToDropdown(address,dropdown, addressID){
     addressOption.className = `address-option-${address.id}`
 
     dropdown.appendChild(addressOption)
-
-    if (addressID !== null) {
-        preselectAddressFromDropdown(addressID)
-    }
 }
 
 function preselectAddressFromDropdown(addressID){
