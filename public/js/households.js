@@ -1,12 +1,17 @@
 const householdList = document.querySelector('#household-list')
 const backendURL = 'http://localhost:3000'
+const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${localStorage.token}`
+}
 
 fetchHouseholds()
 addHouseholdEventListener()
 addAddressEventListener()
 
 function fetchHouseholds(){
-    fetch(`${backendURL}/households`)
+    fetch(`${backendURL}/households`, {headers: headers})
         .then(response => response.json())
         .then(households => {
             displayHouseholds(households)
@@ -54,10 +59,7 @@ function addHouseholdEventListener() {
 function postNewHousehold(household) {
     fetch(`${backendURL}/households`, {
         method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(household)
     }).then(response => response.json())
     .then(results => {
@@ -128,10 +130,7 @@ function addAddressEventListener(){
 function postNewAddress(address){
     fetch(`${backendURL}/addresses`, {
         method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-type': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(address)
     }).then(response => response.json())
         .then(results => {

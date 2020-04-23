@@ -1,6 +1,11 @@
 const guestList = document.querySelector('#guest-list')
 const rows = guestList.getElementsByTagName("tr")
 const backendURL = 'http://localhost:3000'
+const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${localStorage.token}`
+}
 const guestRSVP = {
     true: '<i class="fas fa-heart"></i>',
     false: '<i class="far fa-frown"></i>',
@@ -15,7 +20,7 @@ fetchHouseholds()
 clearMessageOnAddGuest()
 
 function fetchGuests(){
-    fetch(`${backendURL}/guests`)
+    fetch(`${backendURL}/guests`, {headers: headers})
         .then(response => response.json())
         .then(guests => {
             displayGuests(guests)
@@ -89,7 +94,7 @@ function iconEventListeners(guestList){
 }
 
 function getGuestInfo(guestID){
-    fetch(`${backendURL}/guests/${guestID}`)
+    fetch(`${backendURL}/guests/${guestID}`, {headers: headers})
         .then(response => response.json())
         .then(guest => displayGuestInfo(guest))
 }
@@ -150,7 +155,7 @@ function editGuestInfo(guestID){
     const rsvp = document.querySelector('#editRsvpField')
     const address = document.querySelector('#editAddressField')
 
-    fetch(`${backendURL}/guests/${guestID}`)
+    fetch(`${backendURL}/guests/${guestID}`, {headers: headers})
         .then(response => response.json())
         .then(guest => {
             const guestAgeOptions = {
@@ -203,10 +208,7 @@ function deleteGuestInfo(target,guestID){
 function deleteGuest(guestID){
     fetch(`${backendURL}/guests/${guestID}`, {
         method: 'DELETE',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        }
+        headers: headers
     })
 }
 
@@ -257,10 +259,7 @@ function addToRSVPCount(rsvp){
 function postNewGuest(guest) {
     fetch(`${backendURL}/guests`, {
         method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({guest: guest})
     }).then(response => response.json())
         .then(result => {
@@ -270,7 +269,7 @@ function postNewGuest(guest) {
 }
 
 function fetchHouseholds(){
-    fetch(`${backendURL}/households`)
+    fetch(`${backendURL}/households`, {headers: headers})
         .then(response => response.json())
         .then(addHouseholdDropdowns)
 }
@@ -296,7 +295,7 @@ function addHouseholdToDropdown(household,dropdown){
 }
 
 function fetchAddresses(householdID, elementID = 'addressField', addressID = null){
-    fetch(`${backendURL}/households/${householdID}`)
+    fetch(`${backendURL}/households/${householdID}`, {headers: headers})
         .then(response => response.json())
         .then(household => addAddressesDropdown(household.addresses,elementID,addressID))
 }
@@ -370,10 +369,7 @@ function editGuestEventListener(guestID){
 function patchGuest(guestID,guest){
     fetch(`${backendURL}/guests/${guestID}`, {
         method: 'PATCH',
-        headers: {
-            'Content-type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({guest: guest})
     })
     location.reload()
