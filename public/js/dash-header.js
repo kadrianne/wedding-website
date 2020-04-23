@@ -1,10 +1,10 @@
 const menuLinks = [
     {
         title: "guests",
-        url: "./dashboard/guests.html"
+        url: "./guests.html"
     },{
         title: "households",
-        url:"./dashboard/households.html"
+        url:"./households.html"
     }
 ]
 
