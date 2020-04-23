@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
-        <link href="/favicon.ico" type="image/x-icon" rel="icon" />
-        <link rel="manifest" href="/site.webmanifest">
+        <link rel="apple-touch-icon" sizes="180x180" href="./apple-touch-icon.png">
+        <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32x32.png">
+        <link rel="icon" type="image/png" sizes="16x16" href="./favicon-16x16.png">
+        <link href="./favicon.ico" type="image/x-icon" rel="icon" />
+        <link rel="manifest" href="./site.webmanifest">
         <meta charset="utf-8"/>
         <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous" defer></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous" defer></script>
@@ -13,19 +13,32 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous" defer></script>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
         <title>Kristine & Samuel's Wedding - Save the Date</title>
-        <link rel="stylesheet" href="/styles/app.css"/>
+        <link rel="stylesheet" href="./styles/app.css"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+        <script src='./js/index.js' defer></script>
     </head>
-    <body class='m-scene'>
+    <body>
         <header>
-            <script src="js/header.js"></script>
         </header>
-        <main class="scene_element scene_element--fadein">
-            <h1 >Save the Date</h1>
-            <img src='media/savethedate.png' alt='Save the Date' width='50%'>
+        <main>
+            <h1>Kristine & Samuel's Wedding</h1>
+            <h2>Login</h2>
+            <form class='login'>
+                <p>Please contact Kristine or Samuel if you don't have this!</p>
+                <div class="form-group">
+                  <label for="loginUsername">Login name</label>
+                  <input type="text" class="form-control" id="loginUsername" name='login_name' placeholder="Enter login name">
+                </div>
+                <div class="form-group">
+                  <label for="loginPassword">Password</label>
+                  <input type="password" class="form-control" id="loginPassword" name='password' placeholder="Enter password">
+                </div>
+                <p class='error-messages'></p>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </form>
         </main>
         <footer>
-            <script src="js/footer.js"></script>
+          <script src='./js/footer.js'></script>
         </footer>
     </body>
 </html>

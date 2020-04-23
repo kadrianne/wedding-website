@@ -2,17 +2,18 @@ const backendURL = 'http://localhost:3000'
 const authorized = document.querySelectorAll('.authorized')
 const unauthorized = document.querySelector('.unauthorized')
 const guestCards = document.querySelector('.guest-cards')
+const headers = {
+    'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Authorization': `Bearer ${localStorage.token}`
+}
 
 authenticate()
 
 function authenticate(){
-    fetch(`${backendURL}/authenticate-login`, {
+    fetch(`${backendURL}/get-payload`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${localStorage.token}`
-        }
+        headers: headers
     }).then(response => response.json())
         .then(loginResults => {
             if (loginResults.message == 'Error') {
@@ -31,7 +32,7 @@ function hideContent(){
 }
 
 function getHousehold(login){
-    fetch(`${backendURL}/households/${login.household_id}`)
+    fetch(`${backendURL}/households/${login.household_id}`, {headers: headers})
         .then(response => response.json())
         .then(household => {
             displayFamilyName(household)
@@ -101,9 +102,9 @@ function displayAddress(addressContainer,addressID,guestID){
     const addressInfo = document.querySelector(`#address-guest-${guestID} address`)
 
     if (addressID) {
-        fetch(`${backendURL}/addresses/${addressID}`)
-        .then(response => response.json())
-        .then(address => renderAddress(addressContainer,addressInfo,address,guestID))
+        fetch(`${backendURL}/addresses/${addressID}`, {headers:headers})
+            .then(response => response.json())
+            .then(address => renderAddress(addressContainer,addressInfo,address,guestID))
     } else {
         addressInfo.textContent = ''
     }
@@ -196,7 +197,7 @@ function clearRSVPHandler(guestID){
 }
 
 function fetchGuest(guestID,rsvp){
-    fetch(`${backendURL}/guests/${guestID}`)
+    fetch(`${backendURL}/guests/${guestID}`, {headers:headers})
         .then(response => response.json())
         .then(guest => patchRSVP(guest,rsvp))
 }
@@ -204,10 +205,7 @@ function fetchGuest(guestID,rsvp){
 function patchGuest(guestID,guest){
     fetch(`${backendURL}/guests/${guestID}`, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify(guest)
     }).then(response => response.json())
         .then(response => updateMessage(response.message))
@@ -217,10 +215,7 @@ function patchGuest(guestID,guest){
 function patchRSVP(guest,rsvp){
     fetch(`${backendURL}/guests/${guest.id}`, {
         method: 'PATCH',
-        headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json'
-        },
+        headers: headers,
         body: JSON.stringify({
             guest: {
                 first_name: guest.first_name,
@@ -257,7 +252,7 @@ function editGuestInfo(householdID,guestID,addresses){
     const phone = document.querySelector('#editPhoneField')
     const addressDropdown = document.querySelector('#editAddressField')
 
-    fetch(`${backendURL}/guests/${guestID}`)
+    fetch(`${backendURL}/guests/${guestID}`, {headers:headers})
         .then(response => response.json())
         .then(guest => {
             const guestAgeOptions = {

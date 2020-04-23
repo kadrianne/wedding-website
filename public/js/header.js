@@ -1,16 +1,16 @@
 const menuLinks = [
     {
         title: "save the date",
-        url: "/home.html"
+        url: "./home.html"
     },{
         title: "club paradise",
-        url:"/club-paradise.html"
+        url:"./club-paradise.html"
     },{
         title: "guest rsvp",
-        url:"/rsvp.html"
+        url:"./rsvp.html"
     },{
         title: "contact us",
-        url:"/contact.html"
+        url:"./contact.html"
     }
 ]
 

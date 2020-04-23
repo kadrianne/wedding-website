@@ -50,7 +50,7 @@ function checkAuthorization(response){
     if (response.login) {
         console.log(response.token)
         localStorage.setItem("token",response.token)
-        window.location.replace("/home.html")
+        window.location.replace("./home.html")
     } else {
         errorMessages.textContent = response.message
         clearInputs()
