@@ -26,19 +26,19 @@ Authorization is currently implemented on the RSVP page so that users cannot go 
 
 Once logged in, a user can view guest and rsvp information by clicking "guest rsvp" in the menu. Here the guests associated with the household tied to the user's login will be displayed on this page as cards. The user is able to edit each guest's information as well as RSVP for each guest on the guest card. The updates are rendered optimistically and are also persistent on refresh of the page.
 
-![guest-rsvp](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1587672002/wedding-website/guest-rsvp.gif)
+![guest-rsvp](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1590537684/wedding-website/guest-rsvp-opt.gif)
 
 ### Sticky Header and Image Carousel
 
 The website header is fixed on scroll so that a user can always see the heading and menu on the page. The image carousel allows a user to scroll through multiple images with animations.
 
-![header-carousel](media/header-slider.gif)](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1587672000/wedding-website/header.gif)
+![header-carousel](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1590537904/wedding-website/header-opt.gif)
 
 ### Responsiveness
 
 The site is responsive based on screen width so that it is mobile-friendly for users visiting the website on a phone or tablet.
 
-![responsive](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1587672001/wedding-website/responsive.gif)
+![responsive](https://res.cloudinary.com/kristine-and-samuel/image/upload/v1590537882/wedding-website/responsive-opt.gif)
 
 ### Admin Dashboard
 
