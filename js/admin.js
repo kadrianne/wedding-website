@@ -48,6 +48,7 @@ function authenticateUser(user){
 
 function checkAuthorization(response){
     if (response.admin) {
+        localStorage.setItem("token",response.token)
         window.location.replace("./dashboard/guests.html")
     } else {
         errorMessages.textContent = response.message
