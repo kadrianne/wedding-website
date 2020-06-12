@@ -3,6 +3,7 @@
 This is a personal wedding website to provide our wedding guests with wedding details and to collect and manage guest contact information and RSVPs. The goal was to build a responsive website with our own look & feel that would have a seamless UX/UI.
 
 Back-end respository: https://github.com/kadrianne/wedding-website
+<br>[Demo Video](https://www.loom.com/share/d887646dd15f4f69bcf224b9b66bf976)
 
 
 ## Built With
