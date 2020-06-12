@@ -1,4 +1,4 @@
-const adminLoginURL = 'http://localhost:3000/admin-login'
+const adminLoginURL = 'https://wedding-website-backend.herokuapp.com/admin-login'
 
 const loginForm = document.querySelector('form.login')
 const errorMessages = document.querySelector('.error-messages')

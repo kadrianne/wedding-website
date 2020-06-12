@@ -1,4 +1,4 @@
-const guestLoginURL = 'http://localhost:3000/guest-login'
+const guestLoginURL = 'https://wedding-website-backend.herokuapp.com/guest-login'
 
 const loginForm = document.querySelector('form.login')
 const errorMessages = document.querySelector('.error-messages')

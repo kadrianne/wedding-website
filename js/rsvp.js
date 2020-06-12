@@ -1,4 +1,4 @@
-const backendURL = 'http://localhost:3000'
+const backendURL = 'https://wedding-website-backend.herokuapp.com'
 const authorized = document.querySelectorAll('.authorized')
 const unauthorized = document.querySelector('.unauthorized')
 const guestCards = document.querySelector('.guest-cards')

@@ -1,6 +1,6 @@
 const guestList = document.querySelector('#guest-list')
 const rows = guestList.getElementsByTagName("tr")
-const backendURL = 'http://localhost:3000'
+const backendURL = 'https://wedding-website-backend.herokuapp.com'
 const headers = {
     'Content-Type': 'application/json',
     'Accept': 'application/json',
